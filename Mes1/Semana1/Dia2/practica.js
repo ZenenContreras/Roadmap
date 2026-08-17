@@ -19,6 +19,11 @@ Debe devolver el promedio.
 
 // TU SOLUCIÓN:
 
+function calculateAverage(a, b, c) {
+    return (a + b + c) / 3
+}
+
+console.log("EJERCICIO 1: ", calculateAverage(1,2,3))
 
 
 
@@ -34,7 +39,11 @@ como arrow function.
 
 // TU SOLUCIÓN:
 
+const calculateAverageArrow = (a, b, c) => {
+    return (a + b + c) / 3
+}
 
+console.log("EJERCICIO 2: ", calculateAverageArrow(1,2,3))
 
 
 // ------------------------------------------------------------
@@ -54,7 +63,11 @@ Hello NAME!
 
 // TU SOLUCIÓN:
 
+function greet(name = "Developer") {
+    return `Hello ${name}!`
+}
 
+console.log("EJERCICIO 3: ", greet("Zenen"))
 
 
 // ------------------------------------------------------------
@@ -78,6 +91,11 @@ debe devolver:
 
 // TU SOLUCIÓN:
 
+function calculateDiscount(price, percentage) {
+    return price - (price * percentage/100) 
+}
+
+console.log("EJERCICIO 4: ", calculateDiscount(100,20))
 
 
 
@@ -102,6 +120,11 @@ Debe devolver:
 
 // TU SOLUCIÓN:
 
+function addTax(price, taxRate) {
+    return price + (price * taxRate) 
+}
+
+console.log("EJERCICIO 5: ", addTax(100, 0.19))
 
 
 
@@ -123,6 +146,13 @@ Debe devolver:
 // TU SOLUCIÓN:
 
 
+function getFullName(firstName, lastName) {
+    return firstName + ' ' + lastName
+}
+
+console.log("EJERCICIO 6: ", getFullName("Zenen", "Contreras"))
+
+
 
 
 // ------------------------------------------------------------
@@ -142,6 +172,12 @@ getInitials(firstName, lastName)
 
 // TU SOLUCIÓN:
 
+function getInitials(firstName, lastName) {
+    const Initials = firstName.split('')[0] + lastName.split('')[0]
+    return Initials
+}
+
+console.log("EJERCICIO 7: ", getInitials("Zenen", "Contreras"))
 
 
 
@@ -165,6 +201,12 @@ si el número > 0.
 // TU SOLUCIÓN:
 
 
+function isPositive(number) {
+    return number > 0
+}
+
+console.log("EJERCICIO 8: ", isPositive(-2))
+
 
 
 // ------------------------------------------------------------
@@ -182,6 +224,12 @@ NO uses Math.max().
 
 // TU SOLUCIÓN:
 
+function getMax(a, b ,c) {
+    const numbers = [a,b,c].reduce((acummulator, current) => current > acummulator ? current : acummulator)
+    return numbers
+}
+
+console.log("EJERCICIO 9: ", getMax(5, 2, 3))
 
 
 
@@ -202,7 +250,11 @@ weight / height ** 2
 
 // TU SOLUCIÓN:
 
+function calculateBMI(weight, height) {
+    return weight / height ** 2
+}
 
+console.log("EJERCICIO 10: ", calculateBMI(80, 178))
 
 
 // ------------------------------------------------------------
@@ -237,6 +289,12 @@ Explica POR QUÉ.
 
 // TU RESPUESTA:
 
+/*
+    local
+    global
+
+    pro el scop primero solo toma el de la funcion y despues el del estado global
+*/
 
 
 
@@ -269,6 +327,7 @@ console.log(number);
 
 // TU RESPUESTA:
 
+//no funciona por que estan dentro de un bloque en especifico
 
 
 
@@ -303,7 +362,19 @@ processNumber(5, square)
 
 // TU SOLUCIÓN:
 
+function processNumber(number, operation){
+    return operation(number)
+}
 
+function double(number){
+    return number * 2
+}
+
+function square(number){
+    return number ** 2
+}
+
+console.log("EJERCICIO 13: ", processNumber(10, double), processNumber(10, square) )
 
 
 // ------------------------------------------------------------
@@ -337,8 +408,30 @@ calculate(10, 5, multiply)
 
 // TU SOLUCIÓN:
 
+function add(a, b) {
+    return a + b
+}
 
 
+function subtract(a, b) {
+    return a - b
+}
+
+
+function multiply(a, b) {
+    return a * b
+}
+
+
+function divide(a, b) {
+    return a / b
+}
+
+function calculate(a, b, operation) {
+    return operation(a, b)
+}
+
+console.log("EJERCICIO 14: ", calculate(10, 5, add), calculate(10, 5, multiply))
 
 // ------------------------------------------------------------
 // EJERCICIO 15 — CLOSURE
@@ -381,6 +474,22 @@ Después explica con tus propias palabras:
 
 
 // TU SOLUCIÓN:
+
+function createCounter() {
+
+    let count = 0;
+
+    return function () {
+
+        count++
+        return count
+    };
+
+}
+
+const counter = createCounter()
+
+console.log("EJERCICIO 15: ", counter())
 
 
 
