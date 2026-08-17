@@ -32,6 +32,7 @@ const age= 24
 const country = "Colombia"
 const isStudent = true
 
+console.log("EJERCICIO 1:")
 console.log(`My name is ${name}, I am ${age}, I live in ${country} and i ${isStudent ? "am a Student" : " am not a Student"}`)
 
 
@@ -70,6 +71,7 @@ function checkout(price, quantity, discount, tax) {
     console.log(`Subtotal: ${subtotal}\nDiscountAmount: ${discountAmount}\nPriceAfterDiscount: ${priceAfterDiscount}\nTax Amount: ${taxAmount}\nTotal:${total}`)
 }
 
+console.log("Ejercicio 2")
 checkout(250, 3, 10, 19)
 
 
@@ -92,7 +94,13 @@ PISTA:
 
 // TU SOLUCIÓN:
 
+const isEven = (num) => {
+    num % 2 === 0 ? console.log(`${num} es par`) : console.log(`${num} no es par`)
+    
+}
 
+console.log("Ejercicio 3")
+isEven(4)
 
 
 // ------------------------------------------------------------
@@ -110,7 +118,13 @@ NO utilices Math.max().
 
 // TU SOLUCIÓN:
 
+const getMax = (a,b) => {
+    a > b ? console.log(`${a} es mayor que ${b}`) : console.log(`${b} es mayor que ${a}`)
+}
 
+console.log("EJERCICIO 4")
+
+getMax(1, 2)
 
 
 // ------------------------------------------------------------
@@ -128,6 +142,18 @@ NO utilices Math.max().
 
 // TU SOLUCIÓN:
 
+const getMaxOfThree = (a, b, c) =>{
+    const numbers = [a, b, c]
+
+    const max = numbers.reduce((accumulador, currentValue) => {
+        return currentValue > accumulador ? currentValue : accumulador
+    })
+
+    console.log(`El numero mayor es ${max}`)
+}
+
+console.log("EJERCICIO 5")
+getMaxOfThree(1, 2, 3)
 
 
 
@@ -147,8 +173,17 @@ isCitizen === true
 
 
 // TU SOLUCIÓN:
+console.log("EJERCICIO 6: ")
 
+const canVote = (age, isCitizen) => {
+    if( age >= 18 && isCitizen === true){
+        console.log("CAN VOTE")
+    }else{
+        console.log("Stupid ass kid")
+    }
+}
 
+canVote(18, true)
 
 
 // ------------------------------------------------------------
@@ -163,6 +198,16 @@ F = C * 9/5 + 32
 
 
 // TU SOLUCIÓN:
+
+console.log("EJERCICIO 7: ")
+
+const celsiusToFahrenheit = (celsius) => {
+    const F = celsius * 9/5 + 32
+
+    console.log(`${celsius}°C = ${F}°F`)
+}
+
+celsiusToFahrenheit(100)
 
 
 
@@ -182,7 +227,16 @@ Debe devolver:
 
 // TU SOLUCIÓN:
 
+console.log("EJERCICIO 8: ")
 
+const getInitials =(name, lastName) => {
+    const initialN = name.split('')[0]
+    const initialL = lastName.split('')[0]
+
+    console.log(initialN, initialL)
+}
+
+getInitials("Zenen","Contreras")
 
 
 // ------------------------------------------------------------
@@ -205,7 +259,16 @@ Boolean({})
 
 // TU PREDICCIÓN:
 
-
+/* 
+   false
+   true
+   false
+   true
+   false
+   false
+   true
+   true 
+*/
 
 
 // ------------------------------------------------------------
@@ -230,7 +293,14 @@ Después explica POR QUÉ.
 
 // TU RESPUESTA:
 
-
+/* 
+    true
+    false
+    true
+    false
+    true
+    flase
+*/
 
 
 // ------------------------------------------------------------
@@ -254,7 +324,13 @@ Utiliza ternario.
 
 // TU SOLUCIÓN:
 
+console.log("EJERCICIO 11")
 
+const getAccessMessage = (age) => {
+    age >= 18 ? console.log("Access granted") : console.log("Access denied")
+}
+
+getAccessMessage(18)
 
 
 // ------------------------------------------------------------
@@ -280,7 +356,18 @@ Explica qué sucede.
 
 // TU SOLUCIÓN:
 
+console.log('EJERCICIO 12')
 
+
+let nickname = null
+
+console.log(nickname ?? "Developer")
+
+console.log(nickname)
+
+nickname = "Zenen"
+
+console.log(nickname)
 
 
 // ============================================================
