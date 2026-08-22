@@ -482,6 +482,19 @@ RESULTADO ESPERADO:
 // EJERCICIO 14 — CREAR TU PROPIO BIND
 // ============================================================
 
+const user = {
+    name: "Zenen"
+};
+
+function introduce() {
+    return `My name is ${this.name}`;
+}
+
+const boundIntroduce = introduce.bind(user)
+
+console.log(boundIntroduce())
+
+
 /*
 Crea:
 
@@ -543,6 +556,9 @@ const account = {
 
 };
 
+const fn = account.showOwner;
+
+fn();
 
 /*
 ¿Qué ocurre aquí?
@@ -620,6 +636,8 @@ const user11 = {
     name: "Carlos"
 
 };
+
+console.log(user10.introduce.call(user11, 24))
 
 
 /*
@@ -751,6 +769,25 @@ Este es un ejercicio MUY importante.
 // EJERCICIO 20 — RETO
 // ============================================================
 
+const calculator = {
+
+    number: 10,
+
+    double() {
+        return this.number * 2
+    },
+
+    triple() {
+        return this.number * 3
+    }
+
+};
+
+
+console.log(calculator.double())
+console.log(calculator.triple())
+
+
 /*
 Crea:
 
@@ -791,6 +828,16 @@ this.number
 // EJERCICIO 21 — RETO
 // ============================================================
 
+function createGreeter(name) {
+
+    return () => `Hello ${name}`
+}
+
+const greet11 = createGreeter("Zenen");
+
+console.log(greet11());
+
+
 /*
 Crea una función:
 
@@ -828,6 +875,22 @@ No utilices this.
 // ============================================================
 // EJERCICIO 22 — RETO INTERMEDIO
 // ============================================================
+
+
+const user22 = {
+    name: "Zenen",
+
+    greet() {
+        return `Hello ${this.name}`;
+    }
+};
+
+
+const anotherUser = {
+    name: "Carlos"
+};
+
+console.log(user22.greet.call(anotherUser)) 
 
 /*
 Tenemos:
@@ -875,6 +938,22 @@ call()
 // EJERCICIO 23 — RETO INTERMEDIO
 // ============================================================
 
+const person = {
+    name: "Zenen",
+    age: 24
+};
+
+function describePerson(country) {
+
+    return `${this.name} tiene ${this.age} y vive en ${country}`
+
+}
+
+const describe = describePerson.bind(person, "Colombia")
+
+console.log(describe())
+
+
 /*
 Crea:
 
@@ -917,13 +996,7 @@ Zenen is 24 and lives in Colombia
 // EJERCICIO 24 — EXAMEN FINAL
 // ============================================================
 
-/*
-NO MIRES LA TEORÍA.
-
-
-Crea:
-
-const user = {
+const userFinal = {
 
     name: "Zenen",
 
@@ -943,6 +1016,16 @@ const user = {
 
 };
 
+const otherUser = {
+    name: "Carlos",
+    age: 30
+};
+
+const boundGreett = userFinal.greet.bind(userFinal)
+console.log(boundGreett())
+
+console.log(userFinal.getInfo.call(otherUser))
+/*
 
 AHORA:
 
