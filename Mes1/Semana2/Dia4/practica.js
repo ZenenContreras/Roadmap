@@ -22,6 +22,14 @@ REGLAS:
 // EJERCICIO 1 — FUNCIÓN ASYNC
 // ============================================================
 
+async function greet() {
+    return "Hello Zenen"
+}
+
+greet().then((value) => {
+    console.log(value)
+})
+
 /*
 Crea:
 
@@ -46,6 +54,18 @@ Hello Zenen
 // ============================================================
 // EJERCICIO 2 — AWAIT
 // ============================================================
+
+async function getNumber() {
+    return Promise.resolve(100)
+}
+
+async function main(){
+    return await getNumber()
+}
+
+main().then((value) => {
+    console.log(value)
+})
 
 /*
 Crea:
@@ -379,6 +399,25 @@ Products
 // EJERCICIO 11 — FETCH GET
 // ============================================================
 
+async function getUsers() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        const users = await response.json()
+
+        if(!response.ok){
+            throw new Error('Error fetching the server')
+        }
+
+         console.log(users)
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers()
+
 /*
 Utiliza:
 
@@ -419,6 +458,26 @@ etc.
 // EJERCICIO 12 — PRIMER USUARIO
 // ============================================================
 
+async function getUsers2() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if(!response.ok){
+            throw new Error('Error fetching the server')
+        }
+
+        const users = await response.json()
+
+        console.log(users[0])
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers2()
+
+
 /*
 Utilizando la misma API:
 
@@ -454,6 +513,25 @@ más propiedades.
 // EJERCICIO 13 — SOLO NOMBRES
 // ============================================================
 
+async function getUsers3() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if (!response.ok) {
+            throw new Error('Error fetching the server')
+        }
+
+        const users = await response.json()
+
+        console.log(users.map(user => user.name))
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers3()
+
 /*
 Obtén los usuarios.
 
@@ -482,6 +560,26 @@ y así sucesivamente.
 // ============================================================
 // EJERCICIO 14 — FILTRAR USUARIOS
 // ============================================================
+
+async function getUsers4() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if (!response.ok) {
+            throw new Error('Error fetching the server')
+        }
+
+        const users = await response.json()
+
+        console.log(users.filter(user => user.name.length > 5))
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers4()
+
 
 /*
 Obtén:
@@ -519,6 +617,25 @@ filter().
 // EJERCICIO 15 — MAP
 // ============================================================
 
+async function getUsers3() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if (!response.ok) {
+            throw new Error('Error fetching the server')
+        }
+
+        const users = await response.json()
+
+        console.log(users.map(user => ({id: user.id, name: user.name})))
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers3()
+
 /*
 Obtén los usuarios.
 
@@ -551,6 +668,25 @@ Debe haber 10 elementos.
 // EJERCICIO 16 — FUNCIÓN getUsers
 // ============================================================
 
+async function getUsers5() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if (!response.ok) {
+            throw new Error('Error fetching the server')
+        }
+
+        const users = await response.json()
+
+        return users
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUsers5()
+
 /*
 Crea:
 
@@ -580,6 +716,27 @@ de 10 usuarios.
 // ============================================================
 // EJERCICIO 17 — MANEJO DE ERROR
 // ============================================================
+
+async function getData(){
+    try {
+
+        const response = await fetch('https://jsonplaceholder.typicode.com/invalid-url')
+
+        if(!response.ok){
+            throw new Error(`Something went wrong: ${response.status} ` )
+        }
+
+
+        const data = await response.json()
+
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getData()
+
 
 /*
 Crea una función:
@@ -620,6 +777,25 @@ como 404.
 // EJERCICIO 18 — OBTENER UN USUARIO
 // ============================================================
 
+async function getUser6(id) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+        
+        if(!response.ok){
+            throw new Error(`Status code: ${response.status}`)
+        }
+
+        const user = await response.json()
+
+        console.log(`USERRR`, user)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUser6(10)
+
 /*
 Crea:
 
@@ -645,6 +821,25 @@ Leanne Graham
 // ============================================================
 // EJERCICIO 19 — OBTENER POST
 // ============================================================
+
+async function getPost(id) {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        
+        if(!response.ok){
+            throw new Error(`Status code: ${response.status}`)
+        }
+
+        const post = await response.json()
+
+        console.log(`POSTTTT`, post)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getPost(1)
 
 /*
 Crea:
@@ -719,6 +914,30 @@ post.title
 // EJERCICIO 21 — MINI PROYECTO
 // ============================================================
 
+async function getUserProfile(id){
+    try {
+        const [response1, response2] = await Promise.all([fetch(`https://jsonplaceholder.typicode.com/users/${id}`), fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)])
+
+        if(!response1.ok || !response2.ok){
+            throw new Error('Problemss')
+        }
+
+        const [user, post] = await Promise.all([response1.json(), response2.json()])
+
+        console.log( {
+            user: user,
+            posts: post
+        })
+
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUserProfile(1)
+
+
 /*
 Crea:
 
@@ -786,6 +1005,41 @@ y tendrá varios posts.
 // EJERCICIO 22 — POST REQUEST
 // ============================================================
 
+async function post() {
+
+    const post = {
+        title: "Learning JavaScript",
+        body: "I am learning APIs",
+        userId: 1
+    }
+
+    try {
+        
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
+            method: 'POST',
+            header: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(post)
+        })
+
+        if(!response.ok){
+            throw new Error('Problemss')
+        }
+
+        const data = await response.json()
+
+
+        console.log(data)
+
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+post()
+
 /*
 Ahora vamos a enviar información.
 
@@ -834,6 +1088,41 @@ un id para el nuevo recurso.
 // ============================================================
 // EJERCICIO 23 — CREAR FUNCIÓN createPost
 // ============================================================
+
+async function createPost(post) {
+
+    try {
+        
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
+            method: 'POST',
+            header: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(post)
+        })
+
+        if(!response.ok){
+            throw new Error('Problemss')
+        }
+
+        const data = await response.json()
+
+
+        console.log(data)
+
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+createPost({
+
+    title: "My first API",
+    body: "Learning fetch",
+    userId: 1
+
+})
 
 /*
 Crea:
@@ -921,6 +1210,28 @@ posts.length
 // EJERCICIO 25 — RETO FINAL
 // ============================================================
 
+async function getDashboard(){
+    try {
+
+        const [response1, response2] = await Promise.all([fetch('https://jsonplaceholder.typicode.com/users'), fetch('https://jsonplaceholder.typicode.com/posts')])
+
+        if(!response1.ok || !response2.ok){
+            throw new Error('Error reto FINAL')
+        }
+
+        const [usuarios, posts] = await Promise.all([response1.json(), response2.json()])
+
+        console.log({totalUsers: usuarios.length, totalPosts: posts.length})
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getDashboard()
+
+
+
 /*
 ESTE ES EL EJERCICIO
 MÁS IMPORTANTE DEL DÍA.
@@ -979,7 +1290,30 @@ BONUS — RETO EXTRA
 ============================================================
 */
 
+async function getUserWithPosts(userId){
+    try {
+        const [response1, response2] = await Promise.all([fetch(`https://jsonplaceholder.typicode.com/users/${userId}`), fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)])
 
+        if(!response1.ok || !response2.ok){
+            throw new Error('Problemss')
+        }
+
+        const [user, post] = await Promise.all([response1.json(), response2.json()])
+
+        console.log( {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            posts: post
+        })
+
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getUserWithPosts(1)
 /*
 Crea:
 
