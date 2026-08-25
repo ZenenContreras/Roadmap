@@ -637,6 +637,16 @@ Done
 // EJERCICIO 20 — CREAR TU PROPIA PROMISE
 // ============================================================
 
+const waitTwoSeconds = () => new Promise((resolve, reject) => {
+    setTimeout(() =>{
+        resolve("Finished")
+    }, 2000)
+})
+
+waitTwoSeconds()
+    .then((value) => {
+        console.log(value)
+    })
 /*
 Crea:
 
@@ -670,6 +680,22 @@ Finished
 // ============================================================
 // EJERCICIO 21 — VALIDACIÓN
 // ============================================================
+
+const checkAge = (age) => new Promise((resolve, reject) =>{
+    if(age >= 18){
+        resolve("Access granted ---")
+    }else{
+        reject(new Error("Access denied ---"))
+    }
+})
+
+checkAge(15)
+    .then((value) =>{
+        console.log(value)
+    })
+    .catch((error)=>{
+        console.error(error)
+    })
 
 /*
 Crea:
@@ -717,6 +743,17 @@ Access denied
 // EJERCICIO 22 — SIMULAR LOGIN
 // ============================================================
 
+const login = (username, password) => new Promise((resolve, reject) => {
+    username === "admin" && password === '1234' ? resolve('login successfull') :  reject(new Error("Invalid credentials"))
+})
+
+login("admin", "1234")
+    .then((value) => {
+        console.log(value)
+    })
+    .catch((error) => {
+        console.error(error)
+    })
 /*
 Crea:
 
@@ -760,6 +797,21 @@ login("admin", "wrong")
 // EJERCICIO 23 — CHAIN
 // ============================================================
 
+Promise.resolve(10)
+    .then((value) => {
+        return value  * 2
+    })
+    .then((value) => {
+        return value - 5
+    })
+    .then((value) => {
+        return value  * 3
+    })
+    .then((value) => {
+        console.log(value)
+    })    
+
+
 /*
 Crea una cadena que haga:
 
@@ -800,6 +852,17 @@ Porque:
 // ============================================================
 // EJERCICIO 24 — CHAIN + ERROR
 // ============================================================
+Promise.resolve(10)
+    .then((value) => {
+        return value * 2
+    })
+    .then(() => new Error("Something went wrong"))
+    .then((value) => {
+        console.log(value)
+    })
+    .catch((error) => {
+        console.error(error)
+    })
 
 /*
 Crea una cadena:
@@ -835,6 +898,26 @@ Something went wrong
 // ============================================================
 // EJERCICIO 25 — PROMISE.ALL
 // ============================================================
+
+const getUser = () => new Promise ((resolve, reject) => {
+    resolve('User')
+} )
+
+const getPosts = () => new Promise ((resolve, reject) => {
+    resolve('getPosts')
+} )
+
+const getComments = () => new Promise ((resolve, reject) => {
+    resolve('getComments')
+} )
+
+Promise.all([
+    getUser(), 
+    getPosts(), 
+    getComments()
+]).then((results) => {
+    console.log(results)
+})
 
 /*
 Crea tres Promises:
@@ -875,6 +958,32 @@ RESULTADO ESPERADO:
 // ============================================================
 // EJERCICIO 26 — PROMISE.ALL + TIEMPOS
 // ============================================================
+
+const getUser2 = () => new Promise ((resolve, reject) => {
+    setTimeout(() => {
+        resolve('User')
+    }, 1000)
+} )
+
+const getPosts2 = () => new Promise ((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Posts')
+    }, 2000)
+} )
+
+const getComments2 = () => new Promise ((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Comments')
+    }, 3000)
+} )
+
+Promise.all([
+    getUser2(), 
+    getPosts2(), 
+    getComments2()
+]).then((results) => {
+    console.log(results)
+})
 
 /*
 Crea:
@@ -927,6 +1036,19 @@ hasta que todas terminan.
 // EJERCICIO 27 — RETO
 // ============================================================
 
+const getUser1 = () => new Promise ((resolve, reject) => {
+    setTimeout(() => {
+        resolve({
+            id: 1,
+            name: "Zenen"
+        })
+    }, 1000)
+})
+
+getUser1().then((value) => {
+    console.log(`user: ${value.name}` )
+})
+
 /*
 Crea:
 
@@ -966,6 +1088,36 @@ User: Zenen
 // ============================================================
 // EJERCICIO 28 — RETO INTERMEDIO
 // ============================================================
+
+const getUser3 = () => new Promise ((resolve, reject) => {
+        resolve({
+            id: 1,
+            name: "Zenen"
+        })
+
+})
+
+const getProfile = (userId) => new Promise ((resolve, reject) => {
+    resolve({
+        userId: userId,
+        role: "Software Engineer"
+    })
+})
+
+getUser1().then((value) => {
+    console.log(`user: ${value.name}` )
+})
+
+getUser3()
+  .then(user => {
+    return getProfile(user.id);
+  })
+  .then(profile => {
+    return profile.role;
+  })
+  .then(role => {
+    console.log(role);
+  });
 
 /*
 Crea:
@@ -1020,6 +1172,23 @@ Profile
 // EJERCICIO 29 — RETO AVANZADO
 // ============================================================
 
+const registerUser = () => new Promise((resolve, reject) => {
+    resolve("User registered")
+})
+
+const createProfile = () => new Promise((resolve, reject) => {
+    resolve("Profile created")
+})
+
+const sendWelcomeEmail = () => new Promise((resolve, reject) => {
+    resolve("Email sent")
+})
+
+registerUser().then((value) => console.log(value))
+createProfile().then((value) => console.log(value))
+sendWelcomeEmail().then((value) => console.log(value))
+    
+
 /*
 Simula un sistema:
 
@@ -1067,7 +1236,28 @@ La tercera después de la segunda.
 // EJERCICIO 30 — EXAMEN FINAL
 // ============================================================
 
+const getProduct = () => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({
+            id: 1,
+            name: "RTX 5060 Ti",
+            price: 500
+        })
+    }, 1000)
+})
+
+getProduct()
+    .then(product => product)
+    .then(product => {
+        console.log(product.name)
+        return product
+    })
+    .then(product => console.log(product.price))
+    .catch((error) => console.error(error))
+    .finally(() => console.log('Finished'))
+
 /*
+
 NO MIRES LA TEORÍA.
 
 Construye:
