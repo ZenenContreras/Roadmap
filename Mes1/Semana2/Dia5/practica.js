@@ -482,7 +482,7 @@ async function usersWithPosts() {
         }
     })
 }
- usersWithPosts()
+// usersWithPosts()
 
 /*
 Obtén:
@@ -903,7 +903,8 @@ API:
 
 https://jsonplaceholder.typicode.com/posts
 
-
+*/
+/*
 ============================================================
 REQUISITO 1
 ============================================================
@@ -915,7 +916,30 @@ getUsers()
 
 Debe devolver usuarios.
 
+*/
 
+async function getUsersFinal(){
+    
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+        if(!response.ok){
+            throw new Error(`Status Code: ${response.status}`)
+        }
+
+        const users = await response.json()
+
+        return users
+        
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+
+}
+
+
+/*
 ============================================================
 REQUISITO 2
 ============================================================
@@ -926,7 +950,30 @@ getPosts()
 
 
 Debe devolver posts.
+*/
 
+async function getPostsFinal(){
+    
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+
+        if(!response.ok){
+            throw new Error(`Status Code: ${response.status}`)
+        }
+
+        const posts = await response.json()
+
+        return posts
+        
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+
+}
+
+
+/*
 
 ============================================================
 REQUISITO 3
@@ -944,7 +991,55 @@ Como son independientes:
 
 utiliza Promise.all()
 
+*/
 
+async function getDashboardFinal(){
+    try {
+        const [users, posts] = await Promise.all([getUsersFinal(), getPostsFinal()])
+
+        const totalUsers = users.length
+
+        const totalPosts = posts.length
+
+        const averagePostsPerUser =  totalUsers > 0 ? totalPosts / totalUsers : 0
+
+        const postsPerUser = posts.reduce((total, post) => {
+            const userId = post.userId
+            total[userId] = (total[userId] || 0) + 1
+
+            return total
+        }, {})
+
+        const usersWithPosts = users.map((user) => {
+            const userPosts = posts.filter(post => post.userId === user.id)
+
+            return {
+                id: user.id,
+                name : user.name,
+                email  : user.email,
+                posts: userPosts,
+            }
+
+        })
+
+        const topUser = usersWithPosts.reduce((max, user) => user.posts.length > (max?.posts?.length || 0 ) ? user.name : max.name, null)
+
+        return {
+            totalUsers: totalUsers,
+            totalPosts: totalPosts,
+            averagePostsPerUser: averagePostsPerUser,
+            postsPerUser: postsPerUser,
+            usersWithPosts: usersWithPosts,
+            topUser: topUser
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+console.log(await getDashboardFinal())
+
+/*
 ============================================================
 REQUISITO 4
 ============================================================
