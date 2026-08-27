@@ -17,6 +17,27 @@ https://jsonplaceholder.typicode.com/
 // EJERCICIO 1 — GET USERS
 // ============================================================
 
+async function getUsers() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        if (!response.ok) {
+            throw new Error('Failed to fetch users');
+        }
+        const users = await response.json();
+
+        console.log(users.length);
+
+        return users;  
+
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error
+    }
+}
+
+//getUsers();
+
+
 /*
 Crea:
 
@@ -43,6 +64,13 @@ users.length
 // EJERCICIO 2 — TRANSFORMAR USUARIOS
 // ============================================================
 
+async function transFormUsers () {
+    const users = await getUsers()
+    console.log(users.map(user => user.name))
+}
+
+//transFormUsers()
+
 /*
 Obtén los usuarios.
 
@@ -68,6 +96,18 @@ Primer elemento:
 // ============================================================
 // EJERCICIO 3 — CREAR OBJETOS SIMPLIFICADOS
 // ============================================================
+
+async function simple() {
+    const users = await getUsers()
+
+    console.log(users.map(user => ({
+        id: user.id,
+        name: user.name,
+        email: user.name
+    })))
+}
+
+//simple()
 
 /*
 Transforma:
@@ -101,6 +141,24 @@ Ejemplo del primero:
 // EJERCICIO 4 — POSTS
 // ============================================================
 
+async function getPosts() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+        if(!response.ok){
+            throw new Error(`Status code: ${response.status}`)
+        }
+
+        const posts = await response.json()
+        console.log(posts.length)
+
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+//getPosts()
+
 /*
 Crea:
 
@@ -126,6 +184,29 @@ posts.length
 // ============================================================
 // EJERCICIO 5 — POSTS DE UN USUARIO
 // ============================================================
+
+async function getUserPosts(userId){
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+
+        if(!response.ok){
+            throw new Error(`Status code: ${response.status}`)
+        }
+
+        const posts = await response.json()
+
+        console.log(posts)
+        return posts
+
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+//getUserPosts(1)
+
+
 
 /*
 Crea:
@@ -157,6 +238,14 @@ JSONPlaceholder devuelve
 // EJERCICIO 6 — COUNT
 // ============================================================
 
+async function userPost1(){
+    const posts = await getUserPosts(1)
+    console.log(posts.length)
+    return posts
+}
+
+//userPost1()
+
 /*
 Obtén los posts del usuario 1.
 
@@ -175,6 +264,15 @@ RESULTADO ESPERADO:
 // EJERCICIO 7 — TÍTULOS
 // ============================================================
 
+async function titlePosts(){
+    const posts = await userPost1()
+    const title = await posts.map(user => user.title)
+
+    console.log(title)
+}
+
+//titlePosts()
+
 /*
 Obtén los posts del usuario 1.
 
@@ -192,6 +290,17 @@ Array de 10 títulos.
 // ============================================================
 // EJERCICIO 8 — POST MÁS LARGO
 // ============================================================
+
+async function titlePostsLong() {
+    const posts = await userPost1();
+    const longestPost = posts.reduce((max, post) => 
+      post.body.length > max.body.length ? post : max
+    );
+    console.log('LONGEST', longestPost);
+    return longestPost;
+  }
+  
+  //titlePostsLong();
 
 /*
 Obtén los posts del usuario 1.
@@ -217,6 +326,28 @@ Tu código debe encontrarlo.
 // ============================================================
 // EJERCICIO 9 — PROMISE.ALL
 // ============================================================
+
+async function getUsersPosts(){
+    try {
+        const [resp1, resp2] = await Promise.all([fetch('https://jsonplaceholder.typicode.com/users'), fetch('https://jsonplaceholder.typicode.com/posts')])
+
+        if(!resp1.ok || !resp2.ok){
+            throw new Error('Something bad')
+        }
+
+        const [users, posts] = await Promise.all([resp1.json(), resp2.json()])
+
+        console.log([users.length, posts.length])
+
+        return [users, posts]
+         
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+ getUsersPosts()
 
 /*
 Obtén simultáneamente:
@@ -244,6 +375,17 @@ posts.length
 // ============================================================
 // EJERCICIO 10 — DASHBOARD STATS
 // ============================================================
+
+async function dashboard(){
+    const [users, posts] = await getUsersPosts()
+
+    const dashboard = {totalUsers: users.length, totalPosts: posts.length}
+
+    console.log(dashboard)
+    return dashboard
+}
+
+// dashboard()
 
 /*
 Utilizando los datos anteriores:
@@ -276,6 +418,24 @@ RESULTADO ESPERADO:
 // EJERCICIO 11 — POSTS POR USUARIO
 // ============================================================
 
+async function postPerUser(){
+    const [ , posts] = await getUsersPosts()
+
+    const usersPosts = posts.reduce((total, post) => {
+        const userId = post.userId
+
+        total[userId] = (total[userId] || 0) + 1
+
+        return total
+        
+    }, {})
+
+    console.log(usersPosts)
+
+}
+
+// postPerUser()
+
 /*
 Obtén todos los posts.
 
@@ -306,6 +466,23 @@ Este ejercicio es importante.
 // ============================================================
 // EJERCICIO 12 — USUARIOS + POSTS
 // ============================================================
+
+async function usersWithPosts() {
+    const [users, posts] = await getUsersPosts()
+
+    const usersWithPosts = users.map((user) => {
+
+        const posts = posts.filter(post => post.userId === user.id)
+
+        return {  
+            id: user.id,
+            name: user.name,
+            email: user.name,
+            posts: posts
+        }
+    })
+}
+ usersWithPosts()
 
 /*
 Obtén:
@@ -370,10 +547,10 @@ async function brokenFunction() {
     const data =
         await response.json();
 
-    console.log(data.users);
+    console.log('USERSSSSSS', data);
 
 }
-
+// brokenFunction()
 
 /*
 PROBLEMA:
@@ -428,9 +605,11 @@ async function brokenFunction2() {
     const data =
         await response.json();
 
-    console.log(data[0].name);
+    console.log(data.name);
 
 }
+
+// brokenFunction2()
 
 
 /*
@@ -469,6 +648,7 @@ const user = {
 
 };
 
+//console.log(user?.profile?.city)
 
 /*
 Obtén:
@@ -488,6 +668,16 @@ Barranquilla
 // ============================================================
 // EJERCICIO 16 — OPTIONAL CHAINING + API
 // ============================================================
+
+
+const optionalChaining = async () => {
+    const user = await getUsers()
+
+    console.log(user.filter(user=> user.id === 1 ).map(user => user.company?.name))
+
+}
+
+//optionalChaining()
 
 /*
 Obtén un usuario.
@@ -514,6 +704,9 @@ Para user 1:
 
 const username = null;
 
+const displayName = username || 'Guest'
+
+console.log(displayName)
 
 /*
 Crea:
@@ -536,6 +729,25 @@ Guest
 // ============================================================
 // EJERCICIO 18 — ERROR HTTP
 // ============================================================
+
+async function errorHttp(){
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users/999999')
+
+        if(!response.ok){
+            throw new Error(`ERROR HTTP: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+// errorHttp()
 
 /*
 Haz request a:
@@ -569,6 +781,26 @@ El catch debe ejecutarse.
 // EJERCICIO 19 — NETWORK ERROR
 // ============================================================
 
+async function errorNetwork(){
+    try {
+        const response = await fetch('https://jsonpla.com')
+
+        if(!response.ok){
+            throw new Error(`ERROR HTTP: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        console.log(data)
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+//errorNetwork()
+
+// errorHttp()
+
 /*
 Intenta hacer fetch
 a una URL inválida,
@@ -584,7 +816,7 @@ RESULTADO ESPERADO:
 
 El catch debe ejecutarse.
 
-
+el error de network ocurre cuando ni siquiera alcanza hasta el servidor y el http error tenemos que agarrarlo con el !response.ok para que salte si hay algun error HTTP
 Después piensa:
 
 ¿Qué diferencia hubo
@@ -601,6 +833,20 @@ Explícatelo tú primero.
 // ============================================================
 // EJERCICIO 20 — ALLSETTLED
 // ============================================================
+
+const promise1 = new Promise((resolve) => {
+    resolve(10)
+})
+
+// const promise2 = new Promise((resolve, reject) => {
+//    reject(new Error('Error'))
+// })
+
+const promise3 = new Promise((resolve) => {
+    resolve(10)
+})
+
+// Promise.allSettled([promise1, promise2, promise3]).then((values) => console.log(values))
 
 /*
 Crea tres Promises:
