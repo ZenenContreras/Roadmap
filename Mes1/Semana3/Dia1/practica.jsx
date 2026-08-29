@@ -13,7 +13,7 @@ Tecnología:
 
 React
 JavaScript
-
+ 
 
 NO copies soluciones.
 
@@ -24,7 +24,7 @@ Intenta escribir cada ejercicio tú mismo.
 EJERCICIO 1 — PRIMER COMPONENTE
 ============================================================
 
-Crea un componente:
+Crea un componente:  
 
 HelloWorld
 
@@ -40,6 +40,11 @@ RESULTADO ESPERADO:
 Hello World
 */
 
+function Helloworld (){
+    return (
+        <h1>Hello World</h1>
+    )
+}
 
 // ============================================================
 // EJERCICIO 2 — COMPONENTE PERSONALIZADO
@@ -66,6 +71,19 @@ RESULTADO ESPERADO:
 Welcome to React
 */
 
+export default function Welcome (){
+    return (
+        <h1>Welcome to React</h1>
+    )
+}
+
+import Welcome from './practica.jsx'
+
+export default function Main(){
+    return (
+        <Welcome />
+    )
+}
 
 // ============================================================
 // EJERCICIO 3 — JSX
@@ -96,6 +114,13 @@ RESULTADO ESPERADO:
 Hello Zenen
 */
 
+function Variable(){
+    const name = 'Zenen'
+    return(
+        <h2>{name}</h2>
+    )
+}
+
 
 // ============================================================
 // EJERCICIO 4 — EXPRESIONES
@@ -124,6 +149,14 @@ RESULTADO ESPERADO:
 10 + 20 = 30
 */
 
+function Expression(){
+    const a = 10
+    const b = 20
+
+    return(
+        <h1>{a + b}</h1>
+    )
+}
 
 // ============================================================
 // EJERCICIO 5 — MULTIPLICACIÓN
@@ -150,6 +183,14 @@ RESULTADO ESPERADO:
 Total: 300
 */
 
+function multiply(){
+    const price = 100;
+    const quantity = 3;
+    return (
+        <h1>{price * quantity}</h1>
+    )
+    
+}
 
 // ============================================================
 // EJERCICIO 6 — PERFIL
@@ -179,6 +220,22 @@ Name: Zenen
 Role: Software Engineer
 Experience: Junior
 */
+
+function perfil() {
+
+    const profile ={
+        Name: 'Zenen',
+        Role: 'Software Engineer',
+        Experience: 'Junior',
+    }
+    return(
+        <div>
+            <h1>{profile.Name}</h1>
+            <h2>{profile.Role}</h2>
+            <h2>{profile.Experience}</h2>
+        </div>
+    )
+}
 
 
 // ============================================================
@@ -213,6 +270,20 @@ Una tarjeta mostrando:
 Zenen
 Software Engineer
 */
+function UserCard() {
+    
+    const profile ={
+        Name: 'Zenen',
+        Role: 'Software Engineer',
+        Experience: 'Junior',
+    }
+    return(
+        <div>
+            <h2>{profile.name}</h2>
+            <p>{profile.Experience}</p>
+        </div>
+    )
+}
 
 
 // ============================================================
@@ -254,6 +325,33 @@ DevPulse
 © 2026 DevPulse
 */
 
+function Header() {
+    
+    return(
+        <header>
+            <span>DevPulse</span>
+        </header>
+    )
+}
+
+function Footer() {
+
+    return(
+        <footer>
+            <p>© 2026 DevPulse</p>
+        </footer>
+    )
+}
+
+function App() {
+
+    return(
+        <>
+            <Header />
+            <Footer />
+        </>
+    )
+}
 
 // ============================================================
 // EJERCICIO 9 — COMPONENTES ANIDADOS
@@ -282,6 +380,11 @@ Dashboard
 [User Card]
 */
 
+function Dashboard(){
+    return (
+        <UserCard />
+    )
+}
 
 // ============================================================
 // EJERCICIO 10 — VARIAS USER CARDS
@@ -307,6 +410,14 @@ Deben existir
 DOS instancias del componente.
 */
 
+function App (){
+    return (
+        <>
+            <UserCard />
+            <UserCard />
+        </>
+    )
+}
 
 // ============================================================
 // EJERCICIO 11 — JAVASCRIPT + JSX
@@ -332,6 +443,17 @@ Zenen
 Followers: 1250
 */
 
+function Jsx (){
+    const username = "Zenen";
+    const followers = 1250;
+
+    return (
+        <div>
+            <h1>{username}</h1>
+            <h1>{followers}</h1>
+        </div>
+    )
+}
 
 // ============================================================
 // EJERCICIO 12 — OBJECT
@@ -374,6 +496,20 @@ Software Engineer
 Colombia
 */
 
+function UserCard() {
+    
+    const profile ={
+        Name: 'Zenen',
+        Role: 'Software Engineer',
+        Experience: 'Junior',
+    }
+    return(
+        <div>
+            <h2>{profile.name}</h2>
+            <p>{profile.Experience}</p>
+        </div>
+    )
+}
 
 // ============================================================
 // EJERCICIO 13 — ARRAY + MAP
@@ -418,7 +554,27 @@ PostgreSQL
 en una lista.
 */
 
+function Map (){
 
+    const technologies = [
+
+        "JavaScript",
+    
+        "React",
+    
+        "Node.js",
+    
+        "PostgreSQL"
+    
+    ];
+    return(
+        <div>
+            {technologies.map((technologie) => (
+                <li>{technologie}</li>
+            ))}
+        </div>
+    )
+}
 // ============================================================
 // EJERCICIO 14 — COMPONENTE TECHNOLOGIES
 // ============================================================
@@ -464,8 +620,8 @@ App
 │
 ├── Header
 ├── Main
-│   ├── Profile
-│   └── Technologies
+│   ├── Plorofile
+│   └── Technogies
 └── Footer
 
 
@@ -544,6 +700,8 @@ function User() {
 
 }
 
+les falta los <>
+
 
 RESULTADO ESPERADO:
 
@@ -593,6 +751,7 @@ Explica:
 ¿Por qué esto no funciona
 como esperas?
 
+est a en minusculas debido a que las mayusculas es loq ue dferencia a un componente de react y un tag de html
 
 Después corrígelo.
 
@@ -635,6 +794,7 @@ function App() {
 
 }
 
+la palabra class es una palabra reservada se tiene que usar className
 
 RESULTADO ESPERADO:
 
@@ -678,7 +838,7 @@ Una tarjeta visual
 con esos cuatro datos.
 */
 
-
+  
 // ============================================================
 // 🔥 RETO FINAL — DEV PROFILE
 // ============================================================
