@@ -7,11 +7,17 @@ import Stats from './Components/Stats'
 
 function App() {
 
+  const user = {
+    name: "Zenen Contreras Royero",
+    rol: "Sotware Enginner",
+    country: "Colombia",
+  }
+
   return (
     <div className='min-h-screen flex flex-col max-w-6xl items-center w-full mx-auto px-4 '>
       <Header />
       <div className='flex-1 flex flex-col justify-center '>
-        <ProfileCard />
+        <ProfileCard user={user} />
       </div>
       <Footer />
     </div>

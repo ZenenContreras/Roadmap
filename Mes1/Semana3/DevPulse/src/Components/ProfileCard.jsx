@@ -2,12 +2,15 @@ import React from 'react'
 import Stats from './Stats'
 import Technologies from './Technologies'
 
-function ProfileCard() {
-  const user = {
-    name: "Zenen Contreras Royero",
-    rol: "Sotware Enginner",
-    country: "Colombia",
+function ProfileCard({user}) {
+
+  const stats= {
+    repositories: 42,
+    followers: 120,
+    following: 80
   }
+
+  const technologies = ['JavaScript', 'React', 'Node.js', 'PostgreSQL' ]
 
   return (
     <div className='rounded-xl p-4 max-w-xl flex flex-col gap-2 shadow-lg items-center border'>
@@ -18,8 +21,8 @@ function ProfileCard() {
       </div>
 
       <div className='flex items-center justify-between w-full flex-wrap'>
-        <Stats/>
-        <Technologies />
+        <Stats stats={stats} />
+        <Technologies technologies={technologies} />
       </div>   
 
     </div>

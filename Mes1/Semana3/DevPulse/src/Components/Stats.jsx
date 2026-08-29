@@ -1,11 +1,6 @@
 import React from 'react'
 
-function Stats() {
-  const stats= {
-    repositories: 42,
-    followers: 120,
-    following: 80
-  }
+function Stats({stats}) {
 
   return (
     <div>

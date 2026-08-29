@@ -1,8 +1,7 @@
 import React from 'react'
 
-function Technologies() {
+function Technologies({technologies}) {
 
-  const technologies = ['JavaScript', 'React', 'Node.js', 'PostgreSQL' ]
 
   return (
     <div className='flex flex-col '>
