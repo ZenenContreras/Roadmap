@@ -5,8 +5,8 @@ function Technologies({technologies}) {
 
   return (
     <div className='flex flex-col '>
-      {technologies.map(tech => (
-        <span>{tech}</span>
+      {technologies.map((tech, index) => (
+        <span key={index}>{tech}</span>
       ))}
     </div>
   )
