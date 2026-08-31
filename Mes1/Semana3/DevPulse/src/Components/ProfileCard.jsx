@@ -28,7 +28,11 @@ function ProfileCard({user}) {
   }
 
   function handlePostgres() {
-    setTechnologies([...technologies, 'Postgres'])
+    if(technologies.includes("Postgres")){
+      setTechnologies([...technologies.filter(tech => tech !== 'Postgres')])
+    }else{
+      setTechnologies([...technologies, 'Postgres'])
+    }
   }
 
   return (
