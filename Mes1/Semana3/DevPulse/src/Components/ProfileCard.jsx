@@ -8,7 +8,8 @@ function ProfileCard({user}) {
   const [isFollowing, setIsFollowing] = useState(false)
   const [followers, setFollowers] = useState(1250)
   const [isOnline, setisOnline] = useState(true)
-  const [technologies, setTechnologies] = useState(['JavaScript', 'React', 'Node.js'])
+  const [technologies, setTechnologies] = useState([])
+  const [technologieInput, setTechnologieInput] = useState("")
 
   const stats= {
     repositories: 42,
@@ -27,11 +28,15 @@ function ProfileCard({user}) {
     }
   }
 
-  function handlePostgres() {
-    if(technologies.includes("Postgres")){
-      setTechnologies([...technologies.filter(tech => tech !== 'Postgres')])
+  function handleSkills(event){
+    event.preventDefault()
+
+    if(!technologieInput.trim()){
+      return
     }else{
-      setTechnologies([...technologies, 'Postgres'])
+      setTechnologies([...technologies, technologieInput])
+      console.log('formejecutado')
+      setTechnologieInput("")
     }
   }
 
@@ -52,12 +57,16 @@ function ProfileCard({user}) {
             </button>
 
             <button className='text-sm border py-1 px-2 rounded-xl transition-transform duration-300 hover:scale-105 active:scale-95 shadow-md' onClick={() => setisOnline(!isOnline)}>
-              {isOnline ? <span>Online</span> : <span>Offline</span>}
+              {isOnline ? <span> 🟢 Online</span> : <span> 🔴 Offline</span>}
             </button>
 
-            <button className='text-sm border py-1 px-2 rounded-xl transition-transform duration-300 hover:scale-105 active:scale-95 shadow-md' onClick={handlePostgres}>
-              {technologies.includes('Postgres') ? <span>Remove it</span> : <span>Add Postgres</span>}
-            </button>
+            <form onSubmit={handleSkills} className='flex flex-col gap-4 '>
+              <input type="text" value={technologieInput} className='border rounded-xl py-1 px-2' placeholder='Type your skills' onChange={(event) => setTechnologieInput(event.target.value)}/>
+
+              <button disabled={!technologieInput.trim()} type='submit' className='text-sm border py-1 px-2 rounded-xl transition-transform duration-300 hover:scale-105 active:scale-95 shadow-md cursor-pointer'>
+                Submit
+              </button>
+            </form>
 
           </div>
         </div>
@@ -65,7 +74,7 @@ function ProfileCard({user}) {
 
       <div className='flex items-center justify-between w-full flex-wrap'>
         <Stats stats={stats} followers={followers} />
-        <Technologies technologies={technologies} />
+        <Technologies technologies={technologies} setTechnologies={setTechnologies} />
       </div>   
 
     </div>
