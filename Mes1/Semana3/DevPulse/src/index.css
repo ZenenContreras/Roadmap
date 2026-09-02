@@ -1,18 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 @theme {
-  --font-bitcount: 'Bitcount Grid Double', system-ui;
-  --color-primary: #C1292E;
-  --color-secondary: #F1D302;
-  --color-tertiary: #6B818C;
+  --font-code: "Source Code Pro", monospace;
+  --font-caacupe:  "Caacupe One", sans-serif;
 
+  --color-principal: #080c14;
+  --color-bg-secondary: #0D1424;
+  --color-card: #101827;
+  --color-input: #121C2D;
+  
+  --color-border: #263653;
+  --color-border-soft: #1B2940;
+
+  --color-text: #F8FAFC;
+  --color-text-secondary: #A8B9DD;
+
+  --color-muted: #7182A5;
+  --color-primary: #5B5BF7;
+  --color-primary-hover: #6D6AFF;
+
+  --color-success: #4ADE80;
+  --color-warning: #FACC15;
+  --color-error: #EF4444;
 }
 
 @layer base {
   body {
-    @apply bg-[#020100] text-[#FDFFFC];
-    font-family: 'Bitcount Grid Double', system-ui;
+    @apply bg-principal text-text;
+    font-family: "Source Code Pro", monospace;
   }
   
   h1 {

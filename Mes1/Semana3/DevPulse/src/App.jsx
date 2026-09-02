@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 function App() {
 
-  const [loading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState(null)
   const [search, setSearch] = useState("")
   const [calendarUser, setCalendarUser] = useState(null)
@@ -19,6 +19,7 @@ function App() {
 
     e.preventDefault()
     setIsLoading(true)
+
     try {
       const response = await fetch(`https://api.github.com/users/${search}`)
 
@@ -49,12 +50,16 @@ function App() {
 
 
   return (
-    <div className='min-h-screen flex flex-col max-w-6xl items-center w-full mx-auto px-4 '>
+    <div className='min-h-screen flex flex-col max-w-6xl w-full mx-auto px-4 '>
       <Header />
-      <div className='flex-1 flex flex-col justify-center items-center gap-4 '>
-        <SearchBar handleSearch={handleSearch} search={search} setSearch={setSearch}/>
-        <ProfileCard user={user} /> 
-        {calendarUser && <GitHubCalendar username={calendarUser}/>}
+      <div className='flex-1 flex flex-col p-8 items-center gap-4 w-full'>
+        <SearchBar isLoading={isLoading} handleSearch={handleSearch} search={search} setSearch={setSearch}/>
+        {!user ? <h1>No user</h1> : 
+        <>
+          <ProfileCard user={user} /> 
+          {calendarUser && <GitHubCalendar username={calendarUser}/>}
+        </>
+        }
       </div>
       <Footer />
     </div>
