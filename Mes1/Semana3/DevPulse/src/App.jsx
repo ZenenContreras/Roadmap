@@ -7,6 +7,7 @@ import Stats from './Components/Stats'
 import { GitHubCalendar } from 'react-github-calendar';
 import SearchBar from './Components/SearchBar'
 import { useState } from 'react'
+import Placeholder from './Components/Placeholder'
 
 function App() {
 
@@ -51,10 +52,11 @@ function App() {
 
   return (
     <div className='min-h-screen flex flex-col max-w-6xl w-full mx-auto px-4 '>
-      <Header />
+      <Header setUser={setUser}/>
       <div className='flex-1 flex flex-col p-8 items-center gap-4 w-full'>
         <SearchBar isLoading={isLoading} handleSearch={handleSearch} search={search} setSearch={setSearch}/>
-        {!user ? <h1>No user</h1> : 
+
+        {!user ? <Placeholder /> : 
         <>
           <ProfileCard user={user} /> 
           {calendarUser && <GitHubCalendar username={calendarUser}/>}
