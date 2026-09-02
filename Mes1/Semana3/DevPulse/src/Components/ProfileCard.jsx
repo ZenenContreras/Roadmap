@@ -43,11 +43,11 @@ function ProfileCard({user}) {
   return (
     <div className='rounded-xl p-4 max-w-xl flex flex-col gap-2 shadow-lg items-center border'>
       <div className='flex flex-col gap-4'>
-        <h2 className='text-4xl font-semibold '>{user.name}</h2>
+        <h2 className='text-4xl font-semibold '>{user?.name}</h2>
         <div className='flex justify-between'>
           <div>
-            <p className='text-tertiary '>{user.country}</p>
-            <p className='text-tertiary'>{user.rol}</p>
+            <p className='text-tertiary '>{user?.country}</p>
+            <p className='text-tertiary'>{user?.rol}</p>
           </div>
 
           <div className='flex flex-col gap-4'>
