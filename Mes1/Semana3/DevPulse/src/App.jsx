@@ -27,11 +27,11 @@ function App() {
 
       const data = await response.json()
 
-      setUser(({
+      setUser({
         name: data.name,
         rol: data.company,
         country: data.location
-      }))
+      })
 
       console.log(user)
       
