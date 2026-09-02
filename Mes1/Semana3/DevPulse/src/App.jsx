@@ -53,8 +53,8 @@ function App() {
       <Header />
       <div className='flex-1 flex flex-col justify-center items-center gap-4 '>
         <SearchBar handleSearch={handleSearch} search={search} setSearch={setSearch}/>
-        <ProfileCard user={user} />
-        <GitHubCalendar username={calendarUser}/>
+        <ProfileCard user={user} /> 
+        {calendarUser && <GitHubCalendar username={calendarUser}/>}
       </div>
       <Footer />
     </div>
