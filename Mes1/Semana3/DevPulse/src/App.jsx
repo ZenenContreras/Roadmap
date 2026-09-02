@@ -13,6 +13,7 @@ function App() {
   const [loading, setIsLoading] = useState(false)
   const [user, setUser] = useState(null)
   const [search, setSearch] = useState("")
+  const [calendarUser, setCalendarUser] = useState(null)
 
   async function handleSearch (e) {
 
@@ -32,6 +33,7 @@ function App() {
         rol: data.company,
         country: data.location
       })
+      setCalendarUser(search)
 
       console.log(user)
       
@@ -52,7 +54,7 @@ function App() {
       <div className='flex-1 flex flex-col justify-center items-center gap-4 '>
         <SearchBar handleSearch={handleSearch} search={search} setSearch={setSearch}/>
         <ProfileCard user={user} />
-        <GitHubCalendar username='zenencontreras'/>
+        <GitHubCalendar username={calendarUser}/>
       </div>
       <Footer />
     </div>
