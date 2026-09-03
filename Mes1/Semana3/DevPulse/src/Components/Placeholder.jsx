@@ -20,22 +20,18 @@ const features = [
 
 function Placeholder() {
   return (
-    <section className='flex w-full flex-1 flex-col justify-center'>
-      <article className='w-full rounded-xl border border-border bg-card p-6'>
-        <div className='flex flex-col items-center gap-5 sm:flex-row sm:items-start'>
-          <div className='flex size-24 shrink-0 items-center justify-center rounded-xl border border-border-soft bg-input'>
-            <img src='github.svg' alt='' className='size-12 opacity-80' />
-          </div>
+    <section className='flex w-full flex-1 flex-col'>
+      <article className='flex h-full min-h-0 w-full flex-1 flex-col rounded-xl border border-border bg-card p-6'>
+        <div className='flex flex-1 flex-col items-center justify-center gap-4 text-center'>
+          <img src='github.svg' alt='' className='size-28 opacity-80' />
 
-          <div className='flex min-w-0 flex-1 flex-col items-center gap-2 sm:items-start sm:gap-3'>
-            <h2 className='text-2xl font-semibold'>Search a GitHub developer</h2>
-            <p className='text-sm leading-relaxed text-text-secondary'>
-              Enter a username to explore their profile, repositories and contributions.
-            </p>
-          </div>
+          <h2 className='text-4xl font-semibold'>Search a GitHub developer</h2>
+          <p className='max-w-md text-sm leading-relaxed text-text-secondary'>
+            Enter a username to explore their profile, repositories and contributions.
+          </p>
         </div>
 
-        <div className='mt-6 grid grid-cols-1 gap-6 border-t border-border-soft pt-4 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-border-soft'>
+        <div className='grid grid-cols-1 gap-6 border-t border-border-soft pt-6 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-border-soft'>
           {features.map(({ icon: Icon, title, description }) => (
             <div key={title} className='flex flex-col items-center gap-1.5 px-2 text-center'>
               <Icon size={18} strokeWidth={1.75} className='text-muted' />
