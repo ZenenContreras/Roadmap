@@ -2,8 +2,6 @@ import './App.css'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ProfileCard from './Components/ProfileCard'
-import Technologies from './Components/Technologies'
-import Stats from './Components/Stats'
 import { GitHubCalendar } from 'react-github-calendar';
 import SearchBar from './Components/SearchBar'
 import { useState } from 'react'
@@ -30,14 +28,8 @@ function App() {
 
       const data = await response.json()
 
-      setUser({
-        name: data.name,
-        rol: data.company,
-        country: data.location
-      })
-      setCalendarUser(search)
-
-      console.log(user)
+      setUser(data)
+      setCalendarUser(data.login)
       
     } catch (error) {
         console.error(error)
@@ -58,8 +50,18 @@ function App() {
 
         {!user ? <Placeholder /> : 
         <>
-          <ProfileCard user={user} /> 
-          {calendarUser && <GitHubCalendar username={calendarUser}/>}
+          <ProfileCard user={user} />
+          {calendarUser && (
+            <section className='w-full flex justify-center overflow-x-auto rounded-xl border border-border bg-card p-6 text-muted'>
+              <GitHubCalendar
+                username={calendarUser}
+                colorScheme='dark'
+                fontSize={12}
+                blockSize={11}
+                blockMargin={3}
+              />
+            </section>
+          )}
         </>
         }
       </div>
