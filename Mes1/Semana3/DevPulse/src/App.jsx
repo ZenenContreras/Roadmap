@@ -9,7 +9,7 @@ import UserNotFound from './Components/UserNotFound'
 import RecentCommits from './Components/RecentCommits'
 import RecentRepos from './Components/RecentRepos'
 import useTheme from './hooks/useTheme'
-import { extractRecentCommits } from './utils/github'
+import { getRecentCommits } from './utils/github'
 
 const calendarTheme = {
   light: ['#f5f5f5', '#d4d4d4', '#a3a3a3', '#525252', '#171717'],
@@ -61,19 +61,19 @@ function App() {
       setUser(data)
       setCalendarUser(data.login)
 
-      const [eventsResponse, reposResponse] = await Promise.all([
-        fetch(`https://api.github.com/users/${data.login}/events/public?per_page=30`),
+      const [commitsResponse, reposResponse] = await Promise.all([
+        getRecentCommits(data.login, [], 5),
         fetch(`https://api.github.com/users/${data.login}/repos?sort=pushed&per_page=5`),
       ])
 
-      if (eventsResponse.ok) {
-        const events = await eventsResponse.json()
-        setCommits(extractRecentCommits(events, 5))
-      }
+      const latestRepos = reposResponse.ok ? await reposResponse.json() : []
+      setRepos(Array.isArray(latestRepos) ? latestRepos : [])
 
-      if (reposResponse.ok) {
-        const latestRepos = await reposResponse.json()
-        setRepos(latestRepos)
+      if (commitsResponse.length > 0) {
+        setCommits(commitsResponse)
+      } else if (Array.isArray(latestRepos) && latestRepos.length > 0) {
+        const fallbackCommits = await getRecentCommits(data.login, latestRepos, 5)
+        setCommits(fallbackCommits)
       }
     } catch (error) {
       console.error(error)
@@ -84,7 +84,7 @@ function App() {
   }
 
   return (
-    <div className='mx-auto flex min-h-svh w-full max-w-175 flex-col gap-10 px-5 pt-8 sm:px-8 md:pt-14'>
+    <div className='mx-auto flex min-h-svh w-full max-w-175 md:max-w-201 flex-col gap-10 px-5 pt-8 sm:px-8 md:pt-14'>
       <Header onReset={handleReset} theme={theme} toggleTheme={toggleTheme} />
       <SearchBar
         isLoading={isLoading}
