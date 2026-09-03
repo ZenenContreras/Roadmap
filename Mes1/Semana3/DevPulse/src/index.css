@@ -1,37 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-code: "Source Code Pro", monospace;
-  --font-caacupe:  "Caacupe One", sans-serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
 
-  --color-principal: #080c14;
-  --color-bg-secondary: #0D1424;
-  --color-card: #101827;
-  --color-input: #121C2D;
-  
-  --color-border: #263653;
-  --color-border-soft: #1B2940;
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-foreground-secondary: #404040;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #737373;
+  --color-primary: #171717;
+  --color-primary-foreground: #fafafa;
+  --color-secondary: #f5f5f5;
+  --color-border: #e5e5e5;
+  --color-input: #e5e5e5;
+  --color-ring: #a1a1a1;
+  --color-destructive: #e40014;
+  --color-card: #ffffff;
+  --color-selection: #f2cf3b;
 
-  --color-text: #F8FAFC;
-  --color-text-secondary: #A8B9DD;
+  --radius: 0.625rem;
+}
 
-  --color-muted: #7182A5;
-  --color-primary: #5B5BF7;
-  --color-primary-hover: #6D6AFF;
-
-  --color-success: #56d364;
-  --color-warning: #FACC15;
-  --color-error: #EF4444;
+.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-foreground-secondary: #a3a3a3;
+  --color-muted: #171717;
+  --color-muted-foreground: #a3a3a3;
+  --color-primary: #fafafa;
+  --color-primary-foreground: #171717;
+  --color-secondary: #262626;
+  --color-border: #262626;
+  --color-input: #262626;
+  --color-ring: #737373;
+  --color-card: #0a0a0a;
+  --color-destructive: #ff6467;
 }
 
 @layer base {
-  body {
-    @apply bg-principal text-text;
-    font-family: "Source Code Pro", monospace;
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    color-scheme: light;
   }
-  
-  h1 {
-    @apply text-3xl font-bold;
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-200;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--color-selection) 46%, white);
+    color: var(--color-foreground);
+  }
+
+  html.dark ::selection {
+    background: color-mix(in oklch, var(--color-selection) 36%, black);
   }
 }
