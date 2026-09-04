@@ -3,7 +3,7 @@ import { formatRelativeTime } from '../utils/github'
 function RecentCommits({ commits }) {
   return (
     <section>
-      <p className='mb-3 text-sm text-muted-foreground'>Last commits</p>
+      <p className='mb-3 text-sm text-muted-foreground'>Latest public commits</p>
 
       {commits.length === 0 ? (
         <p className='text-sm text-muted-foreground'>No recent public commits</p>

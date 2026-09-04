@@ -3,7 +3,7 @@ import { formatRelativeTime } from '../utils/github'
 function RecentRepos({ repos }) {
   return (
     <section>
-      <p className='mb-3 text-sm text-muted-foreground'>Updated repositories</p>
+      <p className='mb-3 text-sm text-muted-foreground'>Latest updated repositories</p>
 
       {repos.length === 0 ? (
         <p className='text-sm text-muted-foreground'>No public repositories</p>
