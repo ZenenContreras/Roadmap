@@ -7,6 +7,8 @@ import Git2PostContext from './context/Git2PostContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <Git2PostContext>
+      <App />
+    </Git2PostContext>
   </StrictMode>,
 )
