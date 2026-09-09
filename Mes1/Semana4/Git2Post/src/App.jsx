@@ -1,14 +1,14 @@
 import './App.css'
-import Hero from './components/Hero'
-import useGit2Post from './hooks/UseGit2Post'
+import AppRouter from './router/AppRouter'
+import UseGit2Post from './hooks/UseGit2Post'
 
 function App() {
-  const { state } = useGit2Post()
+  const { state } = UseGit2Post()
 
   console.log(state)
 
   return (
-    <Hero />
+    <AppRouter />
   )
 }
 

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { UserContext } from "../context/Git2PostContext"
 
-function useGit2Post() {
+function UseGit2Post() {
   const context = useContext(UserContext)
 
   if (!context) {
@@ -13,4 +13,4 @@ function useGit2Post() {
   return { state, dispatch }
 }
 
-export default useGit2Post
+export default UseGit2Post
