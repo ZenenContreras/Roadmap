@@ -8,6 +8,8 @@ import Repositories from '../pages/Repositories';
 import RepositoryDetails from '../pages/RepositoryDetails';
 import Posts from '../pages/Posts';
 import Settings from '../pages/Settings';
+import Login from '../pages/Login';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 
 function AppRouter() {
@@ -15,13 +17,16 @@ function AppRouter() {
     <BrowserRouter>
         <Routes>
             <Route path='/' element={<Landing />} />
+            <Route path='/login' element={<Login />} />
 
-            <Route path='/dashboard' element={<DashboardLayout/>}>
-                <Route index element={<Dashboard />} />
-                <Route path='repositories' element={<Repositories />} />
-                <Route path='repositories/:id' element={<RepositoryDetails />} />
-                <Route path='posts' element={<Posts />} />
-                <Route path='settings' element={<Settings />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path='/dashboard' element={<DashboardLayout/>}>
+                  <Route index element={<Dashboard />} />
+                  <Route path='repositories' element={<Repositories />} />
+                  <Route path='repositories/:id' element={<RepositoryDetails />} />
+                  <Route path='posts' element={<Posts />} />
+                  <Route path='settings' element={<Settings />} />
+              </Route>
             </Route>
 
             <Route path='*' element={<NotFound />}/>
