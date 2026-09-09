@@ -1,53 +1,42 @@
-import UseGit2Post from '../hooks/UseGit2Post'
+import { Link } from 'react-router'
 
 function Landing() {
-  const { state, dispatch } = UseGit2Post()
-
   return (
-    <section className='flex flex-col items-center bg-amber-950 min-h-screen text-white gap-4'> 
- 
-      <h1>Turn your GitHub activity into content.</h1>
-      <p>Transform your commits, repositories and development activity into professional content </p>
+    <section className="flex min-h-screen flex-col items-center justify-center gap-6 bg-amber-950 px-6 text-center text-white">
+      <nav className="flex flex-wrap items-center justify-center gap-4 text-sm font-medium text-amber-100">
+        <Link to="/dashboard" className="hover:text-white">
+          Dashboard
+        </Link>
+        <Link to="/dashboard/repositories" className="hover:text-white">
+          Repositories
+        </Link>
+        <Link to="/dashboard/posts" className="hover:text-white">
+          Posts
+        </Link>
+        <Link to="/dashboard/settings" className="hover:text-white">
+          Settings
+        </Link>
+      </nav>
 
-      <button className='border py-1 px-1 rounded-lg bg-amber-50 text-black cursor-pointer hover:scale-102 duration-200 active:scale-95' onClick={() => dispatch({ type: 'SET_USER', payload: {login: "demo-user", name: "Demo Developer"} })}>
-        Connect Github
-      </button>
+      <p className="text-sm font-semibold tracking-widest uppercase text-amber-200">
+        Git2Post
+      </p>
 
-      <button className='border py-1 px-1 rounded-lg bg-amber-50 text-black cursor-pointer hover:scale-102 duration-200 active:scale-95'  onClick={() => dispatch({type: 'SET_REPOSITORIES', payload: [
-          {
-              id: 1,
-              name: "portfolio"
-          },
-          {
-              id: 2,
-              name: "devpulse"
-          }
-      ]})}
+      <h1 className="max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">
+        Turn your GitHub activity into content.
+      </h1>
+
+      <p className="max-w-xl text-lg text-amber-100">
+        Transform your commits, repositories and development activity into
+        professional posts you can share with your audience.
+      </p>
+
+      <Link
+        to="/dashboard"
+        className="rounded-lg border bg-amber-50 px-5 py-2 text-black duration-200 hover:scale-102 active:scale-95"
       >
-        Set repositories
-      </button>
-
-      <h1>{state.user ? state.user?.name : 'No user connected'}</h1>
-
-      {state.repositories ? state.repositories.map(repository => (
-        <div>
-          <h2>{repository.name}</h2>
-          <button className='border py-1 px-1 rounded-lg bg-amber-50 text-black cursor-pointer hover:scale-102 duration-200 active:scale-95'  onClick={() => dispatch({type: 'SELECT_REPOSITORY' , payload: repository.name})}>Select</button>
-        </div>
-      )) : 'No repositories connected'}
-
-      <h2>Selected repository: {state.selectedRepository}</h2>
-      
-      <button className='border py-1 px-1 rounded-lg bg-amber-50 text-black cursor-pointer hover:scale-102 duration-200 active:scale-95' onClick={() => dispatch({ type: 'SET_GENERATED_POST', payload: 'Just shipped a new feature using react and github'})}>
-        Generated post
-      </button>
-
-      {state.generatedPost}
-
-      <button className='border py-1 px-1 rounded-lg bg-amber-50 text-black cursor-pointer hover:scale-102 duration-200 active:scale-95' onClick={() => dispatch({ type: 'RESET'})}>
-        Reset
-      </button>
-
+        Get Started
+      </Link>
     </section>
   )
 }

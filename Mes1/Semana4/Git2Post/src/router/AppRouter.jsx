@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound';
 import Repositories from '../pages/Repositories';
 import RepositoryDetails from '../pages/RepositoryDetails';
 import Posts from '../pages/Posts';
+import Settings from '../pages/Settings';
 
 
 function AppRouter() {
@@ -20,6 +21,7 @@ function AppRouter() {
                 <Route path='repositories' element={<Repositories />} />
                 <Route path='repositories/:id' element={<RepositoryDetails />} />
                 <Route path='posts' element={<Posts />} />
+                <Route path='settings' element={<Settings />} />
             </Route>
 
             <Route path='*' element={<NotFound />}/>
