@@ -1,6 +1,6 @@
 function Posts() {
   return (
-    <section className="min-h-screen bg-amber-950 px-6 py-16 text-white">
+    <section className="min-h-screen w-full px-6 py-16 text-white">
       <div className="mx-auto flex max-w-4xl flex-col gap-8">
         <h1 className="text-4xl font-bold">Generated Posts</h1>
 

@@ -9,14 +9,17 @@ function RepositoryDetails() {
 
   console.log(repository)
   return (
-    <section className="min-h-screen bg-amber-950 px-6 py-16 text-white">
-      <Link to='/dashboard'>Back to Dashboard</Link>
-      <div className="mx-auto flex max-w-4xl flex-col gap-4">
+    <section className="w-full px-6 py-16 text-white flex flex-col gap-4">
+
+      <Link className="bg-amber-50 text-black py-1 px-2 rounded-lg w-fit" to='/dashboard/repositories'>Back to Repositories</Link>
+
+      <div className="flex max-w-4xl flex-col gap-4">
         <h1 className="text-4xl font-bold">Repository Details</h1>
         <p className="text-lg text-amber-100">Repository ID: {id} </p>
         <p className="text-2xl font-semibold">{repository.name}</p>
         <p className="text-xl font-semibold">{repository.description}</p>
       </div>
+
     </section>
   )
 }

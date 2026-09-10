@@ -1,13 +1,12 @@
-import React from 'react'
-import { Outlet, useNavigate } from 'react-router'
+import { Navigate, Outlet } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
 
-function ProtectedRoute() {
-    const navigate = useNavigate()
-    const {state, dispatch} = UseGit2Post()
+export default function ProtectedRoute() {
+  const { state } = UseGit2Post()
 
+  if (!state.user) {
+    return <Navigate to="/login" replace />
+  }
 
-    return state.user ? <Outlet /> : navigate('/login')
+  return <Outlet />
 }
-
-export default ProtectedRoute
