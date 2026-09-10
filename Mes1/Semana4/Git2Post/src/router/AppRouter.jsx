@@ -9,7 +9,7 @@ import RepositoryDetails from '../pages/RepositoryDetails';
 import Posts from '../pages/Posts';
 import Settings from '../pages/Settings';
 import Login from '../pages/Login';
-import ProtectedRoute from '../components/ProtectedRoute';
+import ProtectedRoutes from './ProtectedRoutes';
 
 
 function AppRouter() {
@@ -19,7 +19,7 @@ function AppRouter() {
             <Route path='/' element={<Landing />} />
             <Route path='/login' element={<Login />} />
 
-            <Route element={<ProtectedRoute />}>
+            <Route element={<ProtectedRoutes />}>
               <Route path='/dashboard' element={<DashboardLayout/>}>
                   <Route index element={<Dashboard />} />
                   <Route path='repositories' element={<Repositories />} />
