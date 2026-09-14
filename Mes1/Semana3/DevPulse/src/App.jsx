@@ -11,10 +11,6 @@ import RecentRepos from './Components/RecentRepos'
 import useTheme from './hooks/useTheme'
 import { getRecentCommits } from './utils/github'
 
-const calendarTheme = {
-  light: ['#f5f5f5', '#d4d4d4', '#a3a3a3', '#525252', '#171717'],
-  dark: ['#262626', '#404040', '#737373', '#a3a3a3', '#fafafa'],
-}
 
 function App() {
   const { theme, toggleTheme } = useTheme()
@@ -110,7 +106,6 @@ function App() {
                   fontSize={12}
                   blockSize={11}
                   blockMargin={3}
-                  theme={calendarTheme}
                 />
               </section>
             )}
