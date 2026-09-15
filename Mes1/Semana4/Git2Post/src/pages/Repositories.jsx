@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link } from 'react-router'
 
 export const mockRepositories = [
   {
@@ -20,24 +20,25 @@ export const mockRepositories = [
 
 function Repositories() {
   return (
-    <section className="min-h-screen px-6 py-16 text-white">
-      <div className="mx-auto flex max-w-4xl flex-col gap-8">
-        <h1 className="text-4xl font-bold">Repositories</h1>
+    <section className="flex flex-col gap-10">
+      <header className="flex flex-col gap-1">
+        <h1 className="font-medium">Repositories</h1>
+        <p className="text-foreground-secondary">Projects you can turn into a post.</p>
+      </header>
 
-        <ul className="flex justify-between gap-4">
-          {mockRepositories.map((repository) => (
-            <li
-              key={repository.id}
-              className="flex-1 rounded-xl border border-amber-800 bg-amber-900/40 p-6 flex flex-col gap-4"
+      <ul className="divide-y divide-border border-t border-border">
+        {mockRepositories.map((repository) => (
+          <li key={repository.id} className="py-4">
+            <Link
+              to={`${repository.id}`}
+              className="font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50"
             >
-              <span>{repository.id}</span>
-              <h2 className="text-xl font-semibold">{repository.name}</h2>
-              <p className="mt-2 text-amber-100">{repository.description}</p>
-              <Link className="bg-amber-50 py-1 px-2 rounded-lg text-black" to={`${repository.id}`}>Check Repository</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+              {repository.name}
+            </Link>
+            <p className="mt-1 text-sm text-foreground-secondary">{repository.description}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

@@ -1,1 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-foreground-secondary: #404040;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #737373;
+  --color-primary: #171717;
+  --color-primary-foreground: #fafafa;
+  --color-secondary: #f5f5f5;
+  --color-border: #e5e5e5;
+  --color-input: #e5e5e5;
+  --color-ring: #a1a1a1;
+  --color-destructive: #e40014;
+  --color-card: #ffffff;
+  --color-selection: #f2cf3b;
+
+  --radius: 0.625rem;
+}
+
+.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-foreground-secondary: #a3a3a3;
+  --color-muted: #171717;
+  --color-muted-foreground: #a3a3a3;
+  --color-primary: #fafafa;
+  --color-primary-foreground: #171717;
+  --color-secondary: #262626;
+  --color-border: #262626;
+  --color-input: #262626;
+  --color-ring: #737373;
+  --color-card: #0a0a0a;
+  --color-destructive: #ff6467;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-200;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--color-selection) 46%, white);
+    color: var(--color-foreground);
+  }
+
+  html.dark ::selection {
+    background: color-mix(in oklch, var(--color-selection) 36%, black);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

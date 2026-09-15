@@ -1,36 +1,53 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router'
+import { NavLink } from 'react-router'
 import UseGit2Post from '../../hooks/UseGit2Post'
-import useToggle from '../../hooks/useToggle'
+import ThemeToggle from '../ThemeToggle'
+import { IconActivity } from '../icons'
+
+const links = [
+  { to: '/dashboard', label: 'Dashboard', end: true },
+  { to: '/dashboard/repositories', label: 'Repositories' },
+  { to: '/dashboard/posts', label: 'Posts' },
+  { to: '/dashboard/settings', label: 'Settings' },
+]
 
 function Sidebar() {
-  const navigate = useNavigate()
-  const { dispatch} = UseGit2Post()
-  const {value, toggle} = useToggle()
+  const { dispatch } = UseGit2Post()
 
-  function handleLogOut(){
-    dispatch({type: 'RESET' })
+  function handleLogOut() {
+    dispatch({ type: 'RESET' })
   }
 
   return (
-    <nav className='flex justify-between w-full mx-25 p-6 text-white'>
-      <h2 className='font-bold text-xl'>Git 2 Post</h2>
-
-      <div className='flex justify-between gap-4 items-center'>
-
-        <NavLink to='/dashboard' end className={({ isActive}) => `${isActive ? "font-bold" : ""} `}>Dashboard</NavLink>
-
-        <NavLink to='/dashboard/repositories' className={({ isActive}) => `${isActive ? "font-bold" : ""} `}>Repositories</NavLink>
-
-        <NavLink to='/dashboard/posts' className={({ isActive}) => `${isActive ? "font-bold" : ""} `} >Posts</NavLink>
-
-        <NavLink to='/dashboard/settings' className={({ isActive}) => `${isActive ? "font-bold" : ""} `}>Settings</NavLink>
-
-        <button className='bg-amber-50 rounded-lg py-1 px-2 text-black cursor-pointer font-bold' onClick={handleLogOut}>Log Out</button>
-
-        <button onClick={toggle} > {value ? 'TRUE' : 'FALSE'} </button>
+    <header className="flex items-start justify-between gap-4">
+      <div>
+        <span className="flex items-center gap-2">
+          <IconActivity className="text-muted-foreground" />
+          <span className="font-medium">Git2Post</span>
+        </span>
+        <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+          {links.map(({ to, label, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                isActive ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground'
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+          <button
+            type="button"
+            onClick={handleLogOut}
+            className="cursor-pointer text-muted-foreground hover:text-foreground"
+          >
+            Search Another User
+          </button>
+        </nav>
       </div>
-    </nav>
+      <ThemeToggle />
+    </header>
   )
 }
 

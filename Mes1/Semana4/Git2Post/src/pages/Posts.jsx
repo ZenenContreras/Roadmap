@@ -1,18 +1,24 @@
+import { Link } from 'react-router'
+
 function Posts() {
   return (
-    <section className="min-h-screen w-full px-6 py-16 text-white">
-      <div className="mx-auto flex max-w-4xl flex-col gap-8">
-        <h1 className="text-4xl font-bold">Generated Posts</h1>
+    <section className="flex flex-col gap-10">
+      <header className="flex flex-col gap-1">
+        <h1 className="font-medium">Posts</h1>
+        <p className="text-foreground-secondary">Drafts generated from your GitHub activity.</p>
+      </header>
 
-        <div className="rounded-xl border border-dashed border-amber-700 bg-amber-900/30 p-10 text-center">
-          <p className="text-lg text-amber-100">No posts generated yet.</p>
-          <button
-            type="button"
-            className="mt-6 rounded-lg border bg-amber-50 px-5 py-2 text-black duration-200 hover:scale-102 active:scale-95"
-          >
-            Create your first post
-          </button>
-        </div>
+      <div className="flex flex-1 flex-col justify-center gap-3 border-t border-border pt-8">
+        <h2 className="font-medium">No posts yet</h2>
+        <p className="max-w-md text-foreground-secondary">
+          Pick a repository first. Git2Post will turn recent work into a draft you can edit and share.
+        </p>
+        <Link
+          to="/dashboard/repositories"
+          className="mt-2 w-fit text-sm font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50"
+        >
+          Browse repositories
+        </Link>
       </div>
     </section>
   )

@@ -1,29 +1,37 @@
+import { Link } from 'react-router'
+import UseGit2Post from '../hooks/UseGit2Post'
+
+const sections = [
+  { to: '/dashboard/repositories', title: 'Repositories', description: 'Your connected GitHub projects.' },
+  { to: '/dashboard/posts', title: 'Posts', description: 'Content created from your activity.' },
+  { to: '/dashboard/settings', title: 'Settings', description: 'Account, GitHub and preferences.' },
+]
+
 function Dashboard() {
+  const { state } = UseGit2Post()
+  const github = state.user?.github || state.user?.name
+
   return (
-    <section className="min-h-screen  px-6 py-16 text-white">
-      <div className="mx-auto flex max-w-4xl flex-col gap-8">
-        <header>
-          <h1 className="text-4xl font-bold">Git2Post Dashboard</h1>
-          <p className="mt-2 text-lg text-amber-100">Welcome back.</p>
-        </header>
+    <section className="flex flex-col gap-10">
+      <header className="flex flex-col gap-1">
+        <h1 className="font-medium">Dashboard</h1>
+        <p className="text-foreground-secondary">
+          {github ? `Signed in as @${github}.` : 'Welcome back.'}
+        </p>
+      </header>
 
-        <div className="grid gap-4 sm:grid-cols-3">
-          <article className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-            <h2 className="text-xl font-semibold">Repositories</h2>
-            <p className="mt-2 text-amber-100">Your connected GitHub projects.</p>
-          </article>
-
-          <article className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-            <h2 className="text-xl font-semibold">Generated Posts</h2>
-            <p className="mt-2 text-amber-100">Content created from your activity.</p>
-          </article>
-
-          <article className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-            <h2 className="text-xl font-semibold">Recent Activity</h2>
-            <p className="mt-2 text-amber-100">Latest commits and updates.</p>
-          </article>
-        </div>
-      </div>
+      <ul className="divide-y divide-border border-t border-border">
+        {sections.map((section) => (
+          <li key={section.to} className="py-4">
+            <Link to={section.to} className="group flex items-baseline justify-between gap-4">
+              <span className="font-medium underline decoration-foreground/25 underline-offset-[3px] group-hover:decoration-foreground/50">
+                {section.title}
+              </span>
+              <span className="text-right text-sm text-muted-foreground">{section.description}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

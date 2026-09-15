@@ -1,29 +1,33 @@
+import UseGit2Post from '../hooks/UseGit2Post'
+
+const rows = [
+  { title: 'GitHub account', description: 'Connect your profile to start generating posts.' },
+  { title: 'Preferences', description: 'Choose how Git2Post formats your content.' },
+  { title: 'Appearance', description: 'Light, dark or follow the system.' },
+  { title: 'Account', description: 'Manage your Git2Post details.' },
+]
+
 function Settings() {
+  const { state } = UseGit2Post()
+  const github = state.user?.github || state.user?.name
+
   return (
-    <section className="min-h-screen w-full px-6 py-16 text-white">
-      <div className="mx-auto flex max-w-4xl flex-col gap-8">
-        <h1 className="text-4xl font-bold">Settings</h1>
+    <section className="flex flex-col gap-10">
+      <header className="flex flex-col gap-1">
+        <h1 className="font-medium">Settings</h1>
+        <p className="text-foreground-secondary">
+          {github ? `Connected as @${github}.` : 'Manage how Git2Post works for you.'}
+        </p>
+      </header>
 
-        <section className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-          <h2 className="text-xl font-semibold">GitHub Account</h2>
-          <p className="mt-2 text-amber-100">Connect your GitHub profile to start generating posts.</p>
-        </section>
-
-        <section className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-          <h2 className="text-xl font-semibold">Preferences</h2>
-          <p className="mt-2 text-amber-100">Choose how Git2Post formats your content.</p>
-        </section>
-
-        <section className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-          <h2 className="text-xl font-semibold">Theme</h2>
-          <p className="mt-2 text-amber-100">Light, dark or system appearance.</p>
-        </section>
-
-        <section className="rounded-xl border border-amber-800 bg-amber-900/40 p-6">
-          <h2 className="text-xl font-semibold">Account</h2>
-          <p className="mt-2 text-amber-100">Manage your Git2Post account details.</p>
-        </section>
-      </div>
+      <ul className="divide-y divide-border border-t border-border">
+        {rows.map((row) => (
+          <li key={row.title} className="flex items-baseline justify-between gap-4 py-4">
+            <h2 className="font-medium">{row.title}</h2>
+            <p className="text-right text-sm text-muted-foreground">{row.description}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
