@@ -45,7 +45,7 @@ function AppShell({ subtitle, children }) {
   return (
     <div className="mx-auto flex min-h-svh w-full max-w-175 flex-col gap-10 px-5 pt-8 sm:px-8 md:max-w-201 md:pt-14">
       <AppHeader subtitle={subtitle} />
-      <main className="flex flex-1 flex-col justify-center">{children}</main>
+      <main className="flex flex-1 flex-col">{children}</main>
       <AppFooter />
     </div>
   )

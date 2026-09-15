@@ -9,15 +9,17 @@ const sections = [
 
 function Dashboard() {
   const { state } = UseGit2Post()
-  const github = state.user?.github || state.user?.name
+  const username =  state.user?.name
+  const avatar = state.user?.img
 
   return (
     <section className="flex flex-col gap-10">
       <header className="flex flex-col gap-1">
         <h1 className="font-medium">Dashboard</h1>
         <p className="text-foreground-secondary">
-          {github ? `Signed in as @${github}.` : 'Welcome back.'}
+          {username ? `Signed in as @${username}.` : 'Welcome back.'}
         </p>
+        <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
       </header>
 
       <ul className="divide-y divide-border border-t border-border">

@@ -2,26 +2,31 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
 import AppShell from '../components/AppShell'
-import { IconBook, IconFile, IconSearch, IconUser } from '../components/icons'
-
-const features = [
-  { icon: IconUser, title: 'Profile', description: 'Connect the GitHub account you write from' },
-  { icon: IconBook, title: 'Repos', description: 'Pick a project to turn into a post' },
-  { icon: IconFile, title: 'Posts', description: 'Drafts from your recent work' },
-]
+import { IconLoader, IconSearch } from '../components/icons'
+import useGithub from '../hooks/useGithub'
 
 function Login() {
+  const { loading, error, searchUser } = useGithub()
   const navigate = useNavigate()
   const { dispatch } = UseGit2Post()
   const [username, setUsername] = useState('')
+  const [queried, setQueried] = useState('')
 
-  function handleLogin(event) {
+  async function handleLogin(event) {
     event.preventDefault()
     const github = username.trim()
     if (!github) return
 
-    dispatch({ type: 'SET_USER', payload: { name: github, github } })
-    navigate('/dashboard')
+    setQueried(github)
+    const data = await searchUser(github)
+
+    if (data) {
+      dispatch({
+        type: 'SET_USER',
+        payload: { name: data.login, img: data.avatar_url }
+      })
+      navigate('/dashboard')
+    }
   }
 
   return (
@@ -39,14 +44,21 @@ function Login() {
         />
         <button
           type="submit"
-          disabled={!username.trim()}
-          className="flex shrink-0 cursor-pointer items-center py-2 text-sm font-medium text-foreground disabled:cursor-not-allowed disabled:text-muted-foreground"
+          disabled={loading || !username.trim()}
+          className="flex shrink-0 cursor-pointer items-center gap-1.5 py-2 text-sm font-medium text-foreground disabled:cursor-not-allowed disabled:text-muted-foreground"
         >
-          Search
+          {loading ? <IconLoader className="animate-spin" /> : 'Search'}
         </button>
       </form>
 
-      
+      {error ? (
+        <section className="flex flex-1 flex-col justify-center gap-3">
+          <h2 className="font-medium text-destructive">{error}</h2>
+          <p className="max-w-md text-foreground-secondary">
+            We could not find <span className="text-foreground">@{queried}</span> on GitHub. Check the spelling and try another username.
+          </p>
+        </section>
+      ) : null}
     </AppShell>
   )
 }

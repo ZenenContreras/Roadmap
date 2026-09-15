@@ -1,10 +1,13 @@
 export async function getUser(username) {
+  const response = await fetch(`https://api.github.com/users/${encodeURIComponent(username)}`)
 
-    const response = await fetch(`https://api.github.com/users/${username}`);
-    
-    if (!response.ok) {
-        throw new Error('Failed to fetch user');
-    }
+  if (response.status === 404) {
+    throw new Error('User not found')
+  }
 
-    return await response.json();
+  if (!response.ok) {
+    throw new Error('Failed to fetch user')
+  }
+
+  return response.json()
 }
