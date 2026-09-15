@@ -16,10 +16,12 @@ function Dashboard() {
     <section className="flex flex-col gap-10">
       <header className="flex flex-col gap-1">
         <h1 className="font-medium">Dashboard</h1>
-        <p className="text-foreground-secondary">
-          {username ? `Signed in as @${username}.` : 'Welcome back.'}
-        </p>
-        <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
+        <div className='flex items-center gap-4 '>
+          <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
+          <p className="text-foregrgap-2ound-secondary">
+            {username ? `Signed in as \n@${username}.` : 'Welcome back.'}
+          </p>
+        </div>
       </header>
 
       <ul className="divide-y divide-border border-t border-border">

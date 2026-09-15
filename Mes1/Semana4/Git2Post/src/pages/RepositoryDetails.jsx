@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router'
-import { mockRepositories } from './Repositories'
+import UseGit2Post from '../hooks/UseGit2Post'
 
 function RepositoryDetails() {
   const { id } = useParams()
-  const repository = mockRepositories.find((repo) => String(repo.id) === id)
+  const {state, dispatch} = UseGit2Post()
+  const repositories = state.repositories
+  const repository = repositories.find((repo) => String(repo.id) === id)
 
   if (!repository) {
     return (

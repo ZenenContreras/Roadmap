@@ -1,24 +1,38 @@
 import { Link } from 'react-router'
-
-export const mockRepositories = [
-  {
-    id: 1,
-    name: 'DevPulse',
-    description: 'Track developer activity and shipping velocity.',
-  },
-  {
-    id: 2,
-    name: 'Git2Post',
-    description: 'Turn GitHub activity into shareable content.',
-  },
-  {
-    id: 3,
-    name: 'Portfolio',
-    description: 'Personal projects and case studies.',
-  },
-]
+import useRepositories from '../hooks/useRepositories'
+import UseGit2Post from '../hooks/UseGit2Post'
+import { useEffect } from 'react'
+import { IconLoader } from '../components/icons'
 
 function Repositories() {
+  const {state, dispatch} = UseGit2Post()
+  const {repositories, loading, error, searchRepositories} = useRepositories()
+
+  const username = state.user?.name
+
+  useEffect(() => {
+
+    if(!username) return
+
+    async function repositories(){
+
+      try {
+        const data = await searchRepositories(username)
+
+        if(data) {
+          dispatch({ 
+            type: 'SET_REPOSITORIES',
+            payload: data})
+        }
+      } catch (error) {
+        console.error(error)
+      }
+
+    }
+
+    repositories()
+  }, [username])
+
   return (
     <section className="flex flex-col gap-10">
       <header className="flex flex-col gap-1">
@@ -26,8 +40,10 @@ function Repositories() {
         <p className="text-foreground-secondary">Projects you can turn into a post.</p>
       </header>
 
+      {loading ? <IconLoader className="animate-spin" />  : (
+
       <ul className="divide-y divide-border border-t border-border">
-        {mockRepositories.map((repository) => (
+        {state.repositories.map((repository) => (
           <li key={repository.id} className="py-4">
             <Link
               to={`${repository.id}`}
@@ -39,6 +55,9 @@ function Repositories() {
           </li>
         ))}
       </ul>
+      )
+      }
+
     </section>
   )
 }
