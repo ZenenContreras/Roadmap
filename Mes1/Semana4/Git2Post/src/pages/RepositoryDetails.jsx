@@ -72,7 +72,7 @@ function RepositoryDetails() {
 
       <ul className="divide-y divide-border border-t border-border">
         {state.repositoryCommits.map((commit) => (
-          <li key={commit.id} className="py-4">
+          <li key={commit.sha} className="py-4">
             <a
               href={commit.html_url}
               target='_blank'
@@ -86,7 +86,9 @@ function RepositoryDetails() {
 
               <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()} •</p>
 
-              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count}</p>
+              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count} •</p>
+
+              <p className="mt-1 text-sm text-foreground-secondary">{commit.sha.slice(0,7)}</p>
 
             </div>
           </li>

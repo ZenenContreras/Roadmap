@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router'
 import UseGit2Post from '../../hooks/UseGit2Post'
 import ThemeToggle from '../ThemeToggle'
-import { IconActivity } from '../icons'
+import { IconActivity, IconSearch } from '../icons'
 
 const links = [
   { to: '/dashboard', label: 'Dashboard', end: true },
@@ -42,7 +42,7 @@ function Sidebar() {
             onClick={handleLogOut}
             className="cursor-pointer text-muted-foreground hover:text-foreground"
           >
-            Search Another User
+            <IconSearch />
           </button>
         </nav>
       </div>
