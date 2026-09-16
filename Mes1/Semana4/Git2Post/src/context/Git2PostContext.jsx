@@ -5,7 +5,7 @@ export const UserContext = createContext()
 const initialState = {
   user: null,
   repositories: [],
-  selectedRepository: null,
+  repositoryCommits: [],
   generatedPost: null,
 }
 
@@ -15,8 +15,8 @@ function git2postReducer(state, action) {
       return { ...state, user: action.payload }
     case 'SET_REPOSITORIES':
       return { ...state, repositories: action.payload }
-    case 'SELECT_REPOSITORY':
-      return { ...state, selectedRepository: action.payload }
+    case 'SET_COMMITS':
+      return { ...state, repositoryCommits: action.payload }
     case 'SET_GENERATED_POST':
       return { ...state, generatedPost: action.payload }
     case 'RESET':

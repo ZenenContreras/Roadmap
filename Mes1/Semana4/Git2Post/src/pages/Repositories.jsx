@@ -6,7 +6,7 @@ import { IconLoader } from '../components/icons'
 
 function Repositories() {
   const {state, dispatch} = UseGit2Post()
-  const {repositories, loading, error, searchRepositories} = useRepositories()
+  const { loading, searchRepositories} = useRepositories()
 
   const username = state.user?.name
 
