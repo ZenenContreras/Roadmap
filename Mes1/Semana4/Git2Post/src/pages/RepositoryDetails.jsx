@@ -81,8 +81,13 @@ function RepositoryDetails() {
               {commit.commit.message}
             </a>
             <div className='flex gap-1'>
-            <p className="mt-1 text-sm text-foreground-secondary">{commit.author.login} • </p>
-            <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()}</p>
+
+              <p className="mt-1 text-sm text-foreground-secondary">{commit.author.login} • </p>
+
+              <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()} •</p>
+
+              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count}</p>
+
             </div>
           </li>
         ))}
