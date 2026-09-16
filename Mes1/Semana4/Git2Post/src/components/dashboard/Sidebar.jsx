@@ -24,7 +24,7 @@ function Sidebar() {
           <IconActivity className="text-muted-foreground" />
           <span className="font-medium">Git2Post</span>
         </span>
-        <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm">
           {links.map(({ to, label, end }) => (
             <NavLink
               key={to}

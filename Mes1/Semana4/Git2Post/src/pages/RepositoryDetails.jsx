@@ -78,13 +78,13 @@ function RepositoryDetails() {
             >
               {commit.commit.message}
             </a>
-            <div className='flex gap-1'>
+            <div className='grid grid-cols-2 grid-rows-2 md:flex md:justify-between pt-1'>
 
-              <p className="mt-1 text-sm text-foreground-secondary">{commit.author.login} • </p>
+              <p className="mt-1 text-sm text-foreground-secondary">{commit.author.login} </p>
 
-              <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()} •</p>
+              <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()} </p>
 
-              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count} •</p>
+              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count} </p>
 
               <p className="mt-1 text-sm text-foreground-secondary">{commit.sha.slice(0,7)}</p>
 
