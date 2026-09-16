@@ -34,8 +34,6 @@ function RepositoryDetails() {
 
   }, [repository])
 
-  console.log(state.repositoryCommits)
-
   if (!repository) {
     return (
       <section className="flex flex-col gap-3">
