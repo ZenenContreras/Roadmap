@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
+import useGithub from '../hooks/useGithub'
 
 const sections = [
   { to: '/dashboard/repositories', title: 'Repositories', description: 'Your connected GitHub projects.' },
@@ -8,6 +9,7 @@ const sections = [
 ]
 
 function Dashboard() {
+  const {loading} = useGithub()
   const { state } = UseGit2Post()
   const username =  state.user?.name
   const avatar = state.user?.img
@@ -17,7 +19,8 @@ function Dashboard() {
       <header className="flex flex-col gap-1">
         <h1 className="font-medium">Dashboard</h1>
         <div className='flex items-center gap-4 '>
-          <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
+          {loading ? <div className='animate-pulse size-14 bg-muted-foreground/25 shadow rounded-md'></div> : <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
+        }
           <p className="text-foregrgap-2ound-secondary">
             {username ? `Signed in as \n@${username}.` : 'Welcome back.'}
           </p>
