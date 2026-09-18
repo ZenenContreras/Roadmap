@@ -43,7 +43,7 @@ function Repositories() {
       {loading ? 
         <IconLoader className="animate-spin" />  
       : (state.repositories?.length === 0 ? 
-          <span>No public repositories found.</span> 
+          <span className='text-sm border-t border-border pt-4'>No public repositories found.</span> 
       : (<ul className="divide-y divide-border border-t border-border">
           {state.repositories.map((repository) => (
             <li key={repository.id} className="py-4">
