@@ -13,9 +13,9 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | 3 | React Fundamentals + proyecto | Dominar fundamentos de React y construir un proyecto |
 | 4 | React Intermedio + proyecto | Profundizar React y construir un proyecto completo |
 | 5 | TypeScript + React Hooks | Types, interfaces, unions, functions, generics básicos + hooks |
-| 6 | Node.js + Express | Crear una REST API funcional |
-| 7 | SQL + PostgreSQL | Diseñar BD relacional y escribir queries |
-| 8 | Backend + Authentication | Controllers, middleware, JWT/cookies y auth |
+| 6 | Go Fundamentals + Backend | Dominar Go y construir una REST API |
+| 7 | PostgreSQL + Go | Integrar PostgreSQL y diseñar una BD relacional |
+| 8 | Backend Architecture + Authentication | Services, repositories, middleware, JWT/cookies y auth |
 | 9 | Testing | Unit, integration, API testing y React Testing Library |
 | 10 | Docker | Dockerfile, Compose y variables de entorno |
 | 11 | AWS / Cloud | IAM, EC2, S3, RDS, VPC, CloudWatch, CloudFront, Route 53 |
@@ -115,55 +115,67 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 
 ---
 
-# MES 2 — BACKEND + DATABASE
+# MES 2 — BACKEND ENGINEERING WITH GO + POSTGRESQL
 
-> La tabla original empieza el backend en la semana 5. Como el roadmap acordado reserva la semana 5 para TypeScript + React Hooks, el bloque backend comienza en la **semana 6**.
+> El bloque backend comienza en la **semana 6**, después de TypeScript + React Hooks. El lenguaje principal de backend será **Go**, acompañado de PostgreSQL, autenticación, testing y Docker en las semanas siguientes.
 
-## Semana 6 — Node.js + npm + Express
+## Semana 6 — Go Fundamentals + REST API
 
 | Temario | Práctica | Resultado |
 |---|---|---|
-| Node.js | Runtime y módulos | Entender backend JS |
-| npm | package.json/scripts/dependencias | Gestionar proyecto |
-| Express | Server | Crear servidor |
-| Routing | GET/POST/PUT/DELETE | Endpoints |
-| Middleware | Request/response pipeline | Entender middleware |
-| HTTP | Status codes/headers | Respuestas correctas |
-| REST | Recursos/endpoints | Diseñar API |
+| Go + entorno | `go run`, `go build`, `go fmt`, Go Modules | Entender el ecosistema |
+| Variables y tipos | Variables, constants, zero values | Dominar el tipado |
+| Functions | Parámetros, returns y múltiples returns | Crear lógica reutilizable |
+| Structs | Modelar entidades | Trabajar con datos estructurados |
+| Slices y maps | Colecciones | Manipular datos |
+| Pointers | Value vs pointer | Entender referencias |
+| Methods | Receivers | Asociar comportamiento a structs |
+| Error handling | `error` + propagación | Manejar fallos correctamente |
+| HTTP | `net/http`, requests/responses | Entender servidor HTTP |
+| JSON | Encode/decode + struct tags | Trabajar con APIs |
+| Routing | Endpoints REST | Diseñar API |
+| Middleware | Request pipeline | Construir backend mantenible |
 
-**Proyecto:** REST API funcional.
+**Proyecto:** REST API en Go.
 
-## Semana 7 — SQL + PostgreSQL
+## Semana 7 — PostgreSQL + Go
 
 | Temario | Práctica | Resultado |
 |---|---|---|
 | PostgreSQL | Bases y tablas | Crear BD |
-| SELECT | Consultas | Obtener datos |
-| INSERT/UPDATE/DELETE | CRUD | Modificar datos |
+| SQL | SELECT, INSERT, UPDATE, DELETE | CRUD |
 | WHERE/ORDER BY | Filtrado | Queries útiles |
 | JOIN | Relaciones | Combinar tablas |
 | GROUP BY | Agregaciones | Analizar datos |
 | Relationships | 1:1, 1:N, N:M | Diseñar BD |
 | Constraints | PK/FK/UNIQUE/NOT NULL | Integridad |
+| `database/sql` | Conectar Go + PostgreSQL | Integrar backend y BD |
+| Queries desde Go | Rows, Scan, errores | Persistir datos |
+| Transactions | Operaciones atómicas | Mantener consistencia |
+| Migrations | Versionar esquema | Gestionar cambios de BD |
+| Environment variables | Configuración segura | Separar secretos |
 
-**Proyecto:** BD relacional + queries.
+**Proyecto:** Go API + PostgreSQL.
 
-## Semana 8 — Backend profesional + Authentication
+## Semana 8 — Backend Architecture + Authentication
 
 | Temario | Práctica | Resultado |
 |---|---|---|
-| Controllers | Separar HTTP | Código organizado |
+| Handlers | Separar HTTP | Código organizado |
 | Services | Lógica de negocio | Arquitectura limpia |
+| Repositories | Acceso a datos | Separación de responsabilidades |
 | Middleware | Auth/errores/validación | Backend mantenible |
+| Validation | Validar requests | APIs robustas |
 | JWT | Tokens | Autenticación |
 | Cookies | Credenciales | Manejo de sesión |
 | Password hashing | Seguridad | Passwords protegidos |
 | Authorization | Roles/permisos | Recursos protegidos |
-| REST architecture | Estructura | Backend profesional |
+| Error handling | Errores HTTP consistentes | API predecible |
+| REST architecture | Handler → Service → Repository | Backend profesional |
 
-**Proyecto:** React + Express + PostgreSQL + Auth.
+**Proyecto:** React + Go + PostgreSQL + Auth.
 
-**Resultado:** Full-stack funcionando.
+**Resultado:** Full-stack funcionando con backend en Go.
 
 ---
 
@@ -289,7 +301,7 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | Semana 3 | React Fundamentals Project | React + JavaScript |
 | Semana 4 | React Intermediate Project | React + APIs + Router |
 | Semana 5 | TypeScript React App | React + TypeScript + Hooks |
-| Semanas 6–8 | Full-stack App | React + Node + Express + PostgreSQL + Auth |
+| Semanas 6–8 | Full-stack App | React + Go + PostgreSQL + Auth |
 | Semanas 9–12 | Production-ready Full Stack | Testing + Docker + AWS + CI/CD |
 | Semanas 13–16 | Portfolio + interview projects | JS + React + TS + Full Stack |
 
@@ -300,7 +312,7 @@ Al terminar el roadmap debes poder demostrar:
 - JavaScript sólido
 - React sólido
 - TypeScript
-- Node.js + Express
+- Go
 - REST APIs
 - PostgreSQL + SQL
 - Authentication
@@ -322,9 +334,9 @@ Semana 2  → JavaScript Intermedio + APIs
 Semana 3  → React Fundamentals + Proyecto
 Semana 4  → React Intermedio + Proyecto
 Semana 5  → TypeScript + React Hooks
-Semana 6  → Node.js + Express
-Semana 7  → SQL + PostgreSQL
-Semana 8  → Backend + Auth
+Semana 6  → Go Fundamentals + REST API
+Semana 7  → PostgreSQL + Go
+Semana 8  → Backend Architecture + Auth
 Semana 9  → Testing
 Semana 10 → Docker
 Semana 11 → AWS
