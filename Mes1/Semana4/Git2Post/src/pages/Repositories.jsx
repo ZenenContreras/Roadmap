@@ -40,22 +40,24 @@ function Repositories() {
         <p className="text-foreground-secondary">Projects you can turn into a post.</p>
       </header>
 
-      {loading ? <IconLoader className="animate-spin" />  : (
-
-      <ul className="divide-y divide-border border-t border-border">
-        {state.repositories.map((repository) => (
-          <li key={repository.id} className="py-4">
-            <Link
-              to={`${repository.id}`}
-              className="font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50"
-            >
-              {repository.name}
-            </Link>
-            <p className="mt-1 text-sm text-foreground-secondary">{repository.description}</p>
-          </li>
-        ))}
-      </ul>
-      )
+      {loading ? 
+        <IconLoader className="animate-spin" />  
+      : (state.repositories?.length === 0 ? 
+          <span>No repositories found.</span> 
+      : (<ul className="divide-y divide-border border-t border-border">
+          {state.repositories.map((repository) => (
+            <li key={repository.id} className="py-4">
+              <Link
+                to={`${repository.id}`}
+                className="font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50"
+              >
+                {repository.name}
+              </Link>
+              <p className="mt-1 text-sm text-foreground-secondary">{repository.description}</p>
+            </li>
+          ))}
+        </ul>)
+        )
       }
 
     </section>
