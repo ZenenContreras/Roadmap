@@ -18,7 +18,7 @@ function Sidebar() {
   }
 
   return (
-    <header className="flex flex-col gap-3">
+    <header className="flex flex-col gap-4">
       <div className='flex justify-between'>
         <span className="flex items-center gap-2">
           <IconActivity className="text-muted-foreground" />
