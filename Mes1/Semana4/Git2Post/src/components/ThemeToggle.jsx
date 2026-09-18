@@ -17,7 +17,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="cursor-pointer rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground"
+      className="cursor-pointer rounded-md text-muted-foreground transition-colors hover:text-foreground"
     >
       {isDark ? <IconSun /> : <IconMoon />}
     </button>
