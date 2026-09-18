@@ -14,10 +14,10 @@ function Dashboard() {
   const avatar = state.user?.img
 
   return (
-    <section className="flex flex-col gap-10">
-      <header className="flex flex-col gap-1">
+    <section className="flex flex-col gap-4 md:gap-2">
+      <header className="flex flex-col gap-4 md:gap-2">
         <h1 className="font-medium">Dashboard</h1>
-        <div className='flex items-center gap-4 '>
+        <div className='flex items-center gap-4'>
           {!avatar ? <div className='animate-pulse size-14 bg-muted-foreground/25 shadow rounded-md'></div> : <img src={avatar} alt="" className='size-14 shrink-0 rounded-md object-cover'/>
         }
           <p className="text-foregrgap-2ound-secondary">

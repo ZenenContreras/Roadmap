@@ -18,13 +18,16 @@ function Sidebar() {
   }
 
   return (
-    <header className="flex items-start justify-between gap-4">
-      <div>
+    <header className="flex flex-col gap-3">
+      <div className='flex justify-between'>
         <span className="flex items-center gap-2">
           <IconActivity className="text-muted-foreground" />
           <span className="font-medium">Git2Post</span>
         </span>
-        <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm">
+        <ThemeToggle />
+      </div>
+
+      <nav className="flex flex-wrap justify-between md:justify-start items-center gap-x-4 gap-y-2 text-sm ">
           {links.map(({ to, label, end }) => (
             <NavLink
               key={to}
@@ -45,8 +48,6 @@ function Sidebar() {
             <IconSearch />
           </button>
         </nav>
-      </div>
-      <ThemeToggle />
     </header>
   )
 }

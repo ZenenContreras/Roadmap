@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 import Sidebar from '../components/dashboard/Sidebar'
+import { AppFooter } from '../components/AppShell'
 
 function DashboardLayout() {
   return (
@@ -8,6 +9,7 @@ function DashboardLayout() {
       <main className="flex flex-1 flex-col pb-16">
         <Outlet />
       </main>
+      <AppFooter />
     </div>
   )
 }
