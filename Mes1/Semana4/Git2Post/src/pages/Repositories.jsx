@@ -1,14 +1,15 @@
-import { Link } from 'react-router'
 import useRepositories from '../hooks/useRepositories'
 import UseGit2Post from '../hooks/UseGit2Post'
 import { useEffect } from 'react'
 import { IconLoader } from '../components/icons'
+import RepositoryCard from '../components/dashboard/RepositoryCard'
 
 function Repositories() {
   const {state, dispatch} = UseGit2Post()
   const { loading, searchRepositories} = useRepositories()
 
   const username = state.user?.name
+  console.count('Render de Repositories  ')
 
   useEffect(() => {
 
@@ -46,15 +47,7 @@ function Repositories() {
           <span className='text-sm border-t border-border pt-4'>No public repositories found.</span> 
       : (<ul className="divide-y divide-border border-t border-border">
           {state.repositories.map((repository) => (
-            <li key={repository.id} className="py-4">
-              <Link
-                to={`${repository.id}`}
-                className="font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50"
-              >
-                {repository.name}
-              </Link>
-              <p className="mt-1 text-sm text-foreground-secondary">{repository.description}</p>
-            </li>
+            <RepositoryCard repository={repository} key={repository.id}/>
           ))}
         </ul>)
         )
