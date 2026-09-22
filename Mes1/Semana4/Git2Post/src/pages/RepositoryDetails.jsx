@@ -3,6 +3,7 @@ import UseGit2Post from '../hooks/UseGit2Post'
 import { useEffect } from 'react'
 import useCommits from '../hooks/useCommits'
 import { IconLoader } from '../components/icons'
+import CommitCard from '../components/dashboard/CommitCard'
 
 
 function RepositoryDetails() {
@@ -11,6 +12,7 @@ function RepositoryDetails() {
   const repositories = state.repositories
   const repository = repositories.find((repo) => String(repo.id) === id)
   const {loading, error, searchCommits} = useCommits()
+  console.count('Render de commits')
 
   useEffect(() => {
 
@@ -70,26 +72,7 @@ function RepositoryDetails() {
 
       <ul className="divide-y divide-border border-t border-border">
         {state.repositoryCommits.map((commit) => (
-          <li key={commit.sha} className="py-4">
-            <a
-              href={commit.html_url}
-              target='_blank'
-              className="font-medium underline decoration-foreground/25 underline-offset-[3px] hover:decoration-foreground/50 cursor-pointer"
-            >
-              {commit.commit.message}
-            </a>
-            <div className='grid grid-cols-2 grid-rows-2 md:flex md:justify-between pt-1'>
-
-              <p className="mt-1 text-sm text-foreground-secondary">{commit.author.login} </p>
-
-              <p className="mt-1 text-sm text-foreground-secondary">  {new Date(commit.commit.author.date).toLocaleString()} </p>
-
-              <p className="mt-1 text-sm text-foreground-secondary">Comments: {commit.commit.comment_count} </p>
-
-              <p className="mt-1 text-sm text-foreground-secondary">{commit.sha.slice(0,7)}</p>
-
-            </div>
-          </li>
+          <CommitCard key={commit.sha} commit={commit}/>
         ))}
       </ul>
       )}
