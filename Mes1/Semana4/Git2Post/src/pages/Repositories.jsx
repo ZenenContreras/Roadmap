@@ -9,7 +9,6 @@ function Repositories() {
   const { loading, searchRepositories} = useRepositories()
 
   const username = state.user?.name
-  console.count('Render de Repositories  ')
 
   useEffect(() => {
 

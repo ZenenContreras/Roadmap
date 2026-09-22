@@ -12,7 +12,6 @@ function RepositoryDetails() {
   const repositories = state.repositories
   const repository = repositories.find((repo) => String(repo.id) === id)
   const {loading, error, searchCommits} = useCommits()
-  console.count('Render de commits')
 
   useEffect(() => {
 
