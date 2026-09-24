@@ -2,10 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import Git2PostContext from './context/Git2PostContext'
+import Git2PostContext from './context/Git2PostContext.jsx'
 
 
-createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root')
+if (!root) throw new Error('Root element #root not found')
+
+createRoot(root).render(
   <StrictMode>
     <Git2PostContext>
       <App />
