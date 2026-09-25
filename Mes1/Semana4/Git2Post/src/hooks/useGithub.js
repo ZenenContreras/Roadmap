@@ -12,7 +12,15 @@ function useGithub() {
     setUser(null)
 
     try {
-      const data = await getUser(username)
+      const user = await getUser(username)
+
+      const data = {
+        id: user.id, 
+        login: user.login, 
+        avatar_url: user.avatar_url, 
+        bio: user.bio
+      }
+
       setUser(data)
       return data
     } catch (error) {

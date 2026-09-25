@@ -1,15 +1,25 @@
 import { createContext, useReducer } from 'react'
+import { GithubUser } from '../types/user'
+import { Repository } from '../types/repository'
 
-export const UserContext = createContext()
 
-const initialState = {
+export const UserContext = createContext<null>(null)
+
+type InitialState = {
+  user: GithubUser | null
+  repositories: Repository[] 
+  repositoryCommits: []
+  generatedPost: string | null
+}
+
+const initialState: InitialState = {
   user: null,
   repositories: [],
   repositoryCommits: [],
   generatedPost: null,
 }
 
-function git2postReducer(state, action) {
+function git2postReducer(state: any, action: any) {
   switch (action.type) {
     case 'SET_USER':
       return { ...state, user: action.payload }
