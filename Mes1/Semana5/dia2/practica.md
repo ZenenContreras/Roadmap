@@ -1,45 +1,32 @@
-# Semana 5 --- Día 1: Práctica en Git2Post
+# Semana 5 --- Día 2: Práctica en Git2Post
 
 ## Objetivo
 
-Hoy NO crearás otro proyecto.
-
-Vas a comenzar la migración de Git2Post:
-
-``` text
-JavaScript / JSX
-       ↓
-TypeScript / TSX
-```
-
-Y vas a crear los primeros modelos de datos.
+Hoy vas a tomar los tipos del Día 1 y hacer que también representen los
+estados de Git2Post.
 
 ------------------------------------------------------------------------
 
-## 1. Audita Git2Post antes de modificarlo
+## 1. Revisa el trabajo de ayer
 
-Revisa:
+Abre:
 
 ``` text
-src/
-├── components/
-├── context/
-├── hooks/
-├── layouts/
-├── pages/
-├── router/
-├── services/
-└── ...
+src/types/
+├── user.ts
+├── repository.ts
+└── post.ts
 ```
 
-Identifica:
+Comprueba que Git2Post funciona.
 
-1.  Dónde se utilizan repositories.
-2.  Dónde se utilizan users.
-3.  Dónde se crean/guardan posts.
-4.  Dónde se consume GitHub.
-5.  Qué hook recibe repositories.
-6.  Qué componentes reciben repositories.
+Responde:
+
+1.  ¿Qué representa `Repository`?
+2.  ¿Qué propiedad puede ser `null`?
+3.  ¿Qué propiedades son obligatorias?
+4.  ¿Qué componentes usan repositories?
+5.  ¿Dónde llegan desde GitHub?
 
 Dibuja:
 
@@ -57,512 +44,492 @@ RepositoryList
 RepositoryCard
 ```
 
-No continúes hasta entender ese flujo.
-
 ------------------------------------------------------------------------
 
-## 2. Verifica TypeScript
+## 2. Practica interface
 
-Si Git2Post todavía no tiene soporte para TypeScript, configura
-TypeScript siguiendo la configuración de tu versión actual de Vite.
-
-Debes terminar con soporte para:
-
-``` text
-.ts
-.tsx
-```
-
-y un `tsconfig.json`.
-
-Después:
-
-``` bash
-npm run dev
-```
-
-Comprueba que la aplicación continúa funcionando.
-
-------------------------------------------------------------------------
-
-## 3. Crea src/types
-
-Crea:
-
-``` text
-src/types/
-├── user.ts
-├── repository.ts
-└── post.ts
-```
-
-------------------------------------------------------------------------
-
-## 4. Crea GitHubUser
-
-En `src/types/user.ts`, crea un tipo que represente los datos de usuario
-que realmente utiliza Git2Post.
-
-Ejemplo:
+Si `Repository` está como `type`, crea una versión equivalente como
+`interface`:
 
 ``` ts
-export type GitHubUser = {
-  id: number;
-  login: string;
-  name: string | null;
-  avatar_url: string;
-  bio: string | null;
-};
-```
-
-Pero revisa tu API actual y ajusta el modelo a tus datos reales.
-
-------------------------------------------------------------------------
-
-## 5. Crea Repository
-
-En `src/types/repository.ts`:
-
-``` ts
-export type Repository = {
+interface Repository {
   id: number;
   name: string;
   description: string | null;
-};
-```
-
-Después revisa qué propiedades muestra realmente Git2Post.
-
-Si utilizas:
-
-``` text
-language
-stars
-forks
-url
-owner
-updated_at
-```
-
-incorpóralas al modelo con sus tipos correctos.
-
-No agregues propiedades simplemente porque existen en GitHub. Modela
-primero lo que tu aplicación necesita.
-
-------------------------------------------------------------------------
-
-## 6. Crea Post
-
-En `src/types/post.ts`:
-
-``` ts
-export type Post = {
-  id: string;
-  content: string;
-  createdAt: string;
-};
-```
-
-Más adelante agregaremos más propiedades si el proyecto las necesita.
-
-------------------------------------------------------------------------
-
-## 7. Usa Repository en datos reales
-
-Busca algún lugar de Git2Post donde tengas repositories hardcodeados o
-mocks.
-
-Importa:
-
-``` ts
-import type { Repository } from "../types/repository";
-```
-
-y tipa el array:
-
-``` ts
-const repositories: Repository[] = [
-  {
-    id: 1,
-    name: "git2post",
-    description: "Turn GitHub activity into professional content.",
-  },
-];
-```
-
-La ruta del import dependerá de tu estructura.
-
-------------------------------------------------------------------------
-
-## 8. Provoca errores intencionalmente
-
-Haz temporalmente:
-
-``` ts
-const repository: Repository = {
-  id: "1",
-  name: "git2post",
-  description: null,
-};
-```
-
-Observa el error.
-
-¿Por qué ocurre?
-
-Porque:
-
-``` ts
-id: number
-```
-
-pero proporcionaste:
-
-``` ts
-id: string
-```
-
-Corrígelo:
-
-``` ts
-id: 1
-```
-
-------------------------------------------------------------------------
-
-### Segundo error
-
-Prueba:
-
-``` ts
-const repository: Repository = {
-  id: 1,
-  name: "git2post",
-};
-```
-
-Si `description` es obligatoria, TypeScript debe indicar que falta.
-
-Ahora prueba:
-
-``` ts
-type Repository = {
-  id: number;
-  name: string;
-  description?: string;
-};
-```
-
-Observa cómo cambia.
-
-Después vuelve a decidir qué representa mejor los datos reales:
-
-``` ts
-description?: string
-```
-
-o:
-
-``` ts
-description: string | null
-```
-
-------------------------------------------------------------------------
-
-## 9. Experimenta con any
-
-Crea temporalmente:
-
-``` ts
-let data: any = "Git2Post";
-
-data = 123;
-data = true;
-data = {};
-```
-
-Observa que TypeScript deja de protegerte.
-
-Después cambia a:
-
-``` ts
-let data: unknown = "Git2Post";
-```
-
-Prueba:
-
-``` ts
-data.toUpperCase();
-```
-
-Debe aparecer un error.
-
-Ahora:
-
-``` ts
-if (typeof data === "string") {
-  data.toUpperCase();
-}
-```
-
-Este concepto será profundizado mañana con type narrowing.
-
-------------------------------------------------------------------------
-
-## 10. Experimenta con inference
-
-Escribe:
-
-``` ts
-const username = "Zenen";
-const age = 25;
-const active = true;
-```
-
-Pasa el mouse sobre cada variable en VS Code.
-
-Observa qué tipo infiere TypeScript.
-
-Después:
-
-``` ts
-let username = "Zenen";
-
-username = 123;
-```
-
-¿Qué ocurre?
-
-La idea es aprender a leer los tipos que TypeScript ya puede inferir.
-
-------------------------------------------------------------------------
-
-## 11. Migra una utilidad real
-
-Busca una utilidad sencilla de Git2Post.
-
-Por ejemplo:
-
-``` text
-formatDate.js
-```
-
-Cámbiala a:
-
-``` text
-formatDate.ts
-```
-
-Ejemplo:
-
-``` ts
-export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString();
 }
 ```
 
 Comprueba que Git2Post continúa funcionando.
 
-Después prueba:
+------------------------------------------------------------------------
+
+## 3. Practica readonly
+
+Prueba:
 
 ``` ts
-export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString();
+interface Repository {
+  readonly id: number;
+  name: string;
+  description: string | null;
 }
 ```
 
-Observa que ambas versiones funcionan.
+Después intenta:
 
-Esto demuestra que TypeScript puede inferir algunos return types.
+``` ts
+repository.id = 999;
+```
+
+Observa el error y decide si `id` debe ser readonly en tu modelo real.
 
 ------------------------------------------------------------------------
 
-## 12. Migra un componente pequeño
+## 4. Crea GitHubUser como interface
 
-Escoge un componente pequeño de Git2Post.
-
-Preferiblemente uno que no tenga demasiadas dependencias.
-
-Por ejemplo:
-
-``` text
-RepositoryCard.jsx
-```
-
-Cámbialo:
-
-``` text
-RepositoryCard.tsx
-```
-
-Haz que compile.
-
-Después identifica qué props recibe.
-
-Si recibe un repository, empieza a utilizar:
+En `src/types/user.ts`:
 
 ``` ts
-import type { Repository } from "../types/repository";
-```
-
-No intentes resolver todas las props todavía.
-
-El objetivo de hoy es comenzar la migración.
-
-------------------------------------------------------------------------
-
-# Debugging Challenges
-
-## Challenge 1
-
-¿Qué errores debe detectar TypeScript aquí?
-
-``` ts
-const repository: Repository = {
-  id: "123",
-  name: 123,
-  description: false,
-};
-```
-
-No ejecutes primero. Razónalo.
-
-------------------------------------------------------------------------
-
-## Challenge 2
-
-``` ts
-const users: GitHubUser[] = [
-  {
-    id: 1,
-    login: "zenen",
-    name: null,
-    avatar_url: "avatar.png",
-    bio: null,
-  },
-];
-```
-
-Elimina `avatar_url`.
-
-¿Por qué TypeScript protesta?
-
-------------------------------------------------------------------------
-
-## Challenge 3
-
-``` ts
-const description: string | null = null;
-
-description.toUpperCase();
-```
-
-¿Por qué no puedes llamar directamente `toUpperCase()`?
-
-Intenta resolverlo sin buscar la respuesta.
-
-Pista:
-
-``` ts
-if (description !== null) {
-  // ...
+export interface GitHubUser {
+  readonly id: number;
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  bio: string | null;
 }
 ```
 
-Esto prepara el terreno para el Día 2.
+Ajusta las propiedades a los datos que realmente utiliza Git2Post.
 
 ------------------------------------------------------------------------
 
-# Checkpoint conceptual
+## 5. Crea RequestStatus
 
-Responde sin copiar:
+Crea:
 
-1.  ¿Qué es TypeScript?
-2.  ¿Qué diferencia hay entre JavaScript y TypeScript?
-3.  ¿Qué es static typing?
-4.  ¿Qué es type inference?
-5.  ¿Cuándo escribirías un tipo explícitamente?
-6.  ¿Qué diferencia hay entre `null` y `undefined`?
-7.  ¿Cómo se tipa un array?
-8.  ¿Qué hace `type`?
-9.  ¿Qué significa `?` en una propiedad?
-10. ¿Por qué `unknown` es más seguro que `any`?
-11. ¿Qué representa `Repository` en Git2Post?
-12. ¿Por qué `description` podría ser `string | null`?
-
-------------------------------------------------------------------------
-
-# Definition of Done
-
-Marca cada punto cuando realmente puedas hacerlo:
-
--   [ ] TypeScript funciona en Git2Post.
--   [ ] Entiendo type inference.
--   [ ] Entiendo `string`, `number` y `boolean`.
--   [ ] Entiendo `null` y `undefined`.
--   [ ] Sé tipar arrays.
--   [ ] Sé tipar objetos.
--   [ ] Entiendo `type`.
--   [ ] Entiendo propiedades opcionales.
--   [ ] Entiendo `any` vs `unknown`.
--   [ ] Creé `src/types/`.
--   [ ] Creé `GitHubUser`.
--   [ ] Creé `Repository`.
--   [ ] Creé `Post`.
--   [ ] Migré al menos una utilidad a `.ts`.
--   [ ] Empecé a migrar un componente a `.tsx`.
--   [ ] Git2Post sigue funcionando.
--   [ ] Puedo explicar por qué cada tipo existe.
-
-------------------------------------------------------------------------
-
-# Lo que debes haber aprendido hoy
-
-Tu mentalidad al final del día debería ser:
-
-``` text
-GitHub API
-     ↓
-TypeScript type
-     ↓
-Service
-     ↓
-Hook
-     ↓
-Component
+``` ts
+export type RequestStatus =
+  | "idle"
+  | "loading"
+  | "success"
+  | "error";
 ```
 
-Ya no estás diciendo solamente:
+En un componente/hook de Git2Post, prueba:
 
-> "Espero que el repository tenga estas propiedades."
+``` ts
+const [status, setStatus] =
+  useState<RequestStatus>("idle");
+```
 
-Ahora estás empezando a decir:
+Después:
 
-> "Este es el contrato que mi aplicación espera para un Repository."
+``` ts
+setStatus("loading");
+setStatus("success");
+setStatus("error");
+```
+
+Y finalmente:
+
+``` ts
+setStatus("banana");
+```
+
+Comprueba que TypeScript lo rechaza.
 
 ------------------------------------------------------------------------
 
-# Mañana --- Día 2
+## 6. Practica narrowing
 
-Continuaremos con:
+Crea:
 
-``` text
-Interfaces
-Unions
-Literal types
-Type narrowing
-Type guards
-null / undefined
+``` ts
+function formatRepositoryId(id: string | number) {
+  if (typeof id === "string") {
+    return id.toUpperCase();
+  }
+
+  return id.toFixed(0);
+}
 ```
 
-Y lo aplicaremos directamente a los estados de Git2Post:
+Identifica el tipo de `id`:
+
+``` text
+Antes del if → string | number
+Dentro del if → string
+Después → number
+```
+
+------------------------------------------------------------------------
+
+## 7. Narrowing con null
+
+Crea:
+
+``` ts
+function formatDescription(
+  description: string | null
+) {
+  if (description !== null) {
+    return description.toUpperCase();
+  }
+
+  return "No description";
+}
+```
+
+Elimina temporalmente el `if` y observa el error.
+
+Explica por qué TypeScript no puede asumir que `description` es string.
+
+------------------------------------------------------------------------
+
+## 8. Aplica narrowing a Git2Post
+
+Busca un componente que muestre:
+
+``` text
+repository.description
+```
+
+Como puede ser:
+
+``` ts
+string | null
+```
+
+maneja ambos casos:
+
+``` tsx
+{repository.description !== null
+  ? repository.description
+  : "No description"}
+```
+
+Prueba también una solución con `?`/truthiness y piensa cuál expresa
+mejor tu intención.
+
+------------------------------------------------------------------------
+
+## 9. Crea RepositoryState
+
+Crea:
+
+``` ts
+export type RepositoryState =
+  | {
+      status: "idle";
+    }
+  | {
+      status: "loading";
+    }
+  | {
+      status: "success";
+      data: Repository[];
+    }
+  | {
+      status: "error";
+      message: string;
+    };
+```
+
+------------------------------------------------------------------------
+
+## 10. Practica discriminated unions
+
+Crea:
+
+``` ts
+function getRepositoryMessage(
+  state: RepositoryState
+) {
+  if (state.status === "idle") {
+    return "Search for repositories";
+  }
+
+  if (state.status === "loading") {
+    return "Loading repositories...";
+  }
+
+  if (state.status === "error") {
+    return state.message;
+  }
+
+  return `${state.data.length} repositories found`;
+}
+```
+
+Observa que TypeScript sabe que:
+
+``` text
+error → message existe
+success → data existe
+```
+
+------------------------------------------------------------------------
+
+## 11. Conecta el modelo con el flujo real
+
+Identifica en Git2Post:
+
+``` text
+Search
+   ↓
+fetch GitHub
+   ↓
+loading
+   ↓
+success/error
+```
+
+Mapéalo a:
 
 ``` text
 idle
+  ↓
 loading
+  ↓
 success
+```
+
+o:
+
+``` text
+idle
+  ↓
+loading
+  ↓
 error
 ```
 
-para que TypeScript no solo conozca tus datos, sino también **los
-diferentes estados en los que puede encontrarse tu aplicación**.
+Analiza dónde tienes actualmente:
+
+``` text
+loading boolean
+error string | null
+data array | null
+```
+
+y piensa cómo `RepositoryState` podría representar el flujo con menos
+combinaciones ambiguas.
+
+No es obligatorio refactorizar todo todavía.
+
+------------------------------------------------------------------------
+
+## 12. Challenge: estados imposibles
+
+Observa:
+
+``` ts
+type BadState = {
+  loading: boolean;
+  error: string | null;
+  data: Repository[] | null;
+};
+```
+
+¿Puede representar estados contradictorios?
+
+Por ejemplo:
+
+``` ts
+{
+  loading: false,
+  error: "Something went wrong",
+  data: [...]
+}
+```
+
+Compara con:
+
+``` ts
+type RepositoryState =
+  | { status: "loading" }
+  | { status: "success"; data: Repository[] }
+  | { status: "error"; message: string };
+```
+
+Explica qué información gana el segundo modelo.
+
+------------------------------------------------------------------------
+
+## 13. Challenge: narrowing
+
+Completa:
+
+``` ts
+function test(value: string | number | null) {
+  // string → uppercase
+  // number → string
+  // null → "No value"
+}
+```
+
+Debes utilizar narrowing.
+
+No utilices `any`.
+
+------------------------------------------------------------------------
+
+## 14. Challenge: `in`
+
+Crea:
+
+``` ts
+type GitHubProfile = {
+  login: string;
+};
+
+type GitHubOrganization = {
+  login: string;
+  company: string;
+};
+```
+
+Después:
+
+``` ts
+function getAccountInfo(
+  account: GitHubProfile | GitHubOrganization
+) {
+  if ("company" in account) {
+    return account.company;
+  }
+
+  return account.login;
+}
+```
+
+Explica por qué `in` permite hacer narrowing.
+
+------------------------------------------------------------------------
+
+## 15. Debugging Challenge
+
+Rompe intencionalmente:
+
+``` ts
+const state: RepositoryState = {
+  status: "success",
+  message: "Something went wrong",
+};
+```
+
+¿Por qué falla?
+
+Después:
+
+``` ts
+const state: RepositoryState = {
+  status: "error",
+  data: [],
+};
+```
+
+¿Por qué falla?
+
+Después:
+
+``` ts
+const state: RepositoryState = {
+  status: "loading",
+  data: [],
+};
+```
+
+¿Por qué falla?
+
+La respuesta está en que cada variante tiene su propio contrato.
+
+------------------------------------------------------------------------
+
+## 16. Checkpoint
+
+Responde sin mirar la teoría:
+
+1.  ¿Qué es una interface?
+2.  ¿Qué diferencia práctica existe entre `type` e `interface`?
+3.  ¿Qué hace `readonly`?
+4.  ¿Qué es un union type?
+5.  ¿Qué es un literal type?
+6.  ¿Qué es type narrowing?
+7.  ¿Qué hace `typeof`?
+8.  ¿Qué hace `in`?
+9.  ¿Por qué hay que comprobar `null`?
+10. ¿Qué es una discriminated union?
+11. ¿Por qué `RepositoryState` puede ser más seguro que varios booleans?
+
+------------------------------------------------------------------------
+
+## Definition of Done
+
+-   [ ] Entiendo interfaces.
+-   [ ] Entiendo `type` vs `interface`.
+-   [ ] Entiendo propiedades opcionales.
+-   [ ] Entiendo `readonly`.
+-   [ ] Sé crear unions.
+-   [ ] Sé crear literal types.
+-   [ ] Entiendo `string | null`.
+-   [ ] Entiendo type narrowing.
+-   [ ] Sé usar `typeof`.
+-   [ ] Sé comprobar `null`.
+-   [ ] Entiendo `in`.
+-   [ ] Creé `RequestStatus`.
+-   [ ] Creé `RepositoryState`.
+-   [ ] Apliqué un estado tipado a Git2Post.
+-   [ ] Apliqué narrowing a datos reales.
+-   [ ] Git2Post sigue funcionando.
+-   [ ] Puedo explicar por qué cada estado tiene sus propiedades.
+
+------------------------------------------------------------------------
+
+## Lo que debes haber aprendido hoy
+
+Ayer:
+
+``` text
+¿Qué forma tienen mis datos?
+```
+
+Hoy:
+
+``` text
+¿Qué formas y estados pueden tener mis datos?
+```
+
+Para Git2Post:
+
+``` text
+Repository
+     ↓
+RepositoryState
+     ├── idle
+     ├── loading
+     ├── success → data
+     └── error   → message
+```
+
+------------------------------------------------------------------------
+
+## Mañana --- Día 3
+
+**Functions + Arrays/Objects + Generics**
+
+Veremos:
+
+``` text
+typed parameters
+return types
+callbacks
+function types
+arrays
+objects
+<T>
+ApiResponse<T>
+```
+
+y lo aplicaremos principalmente a los **services y respuestas de la
+GitHub API de Git2Post**.
