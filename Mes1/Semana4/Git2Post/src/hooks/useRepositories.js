@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getRepositories } from '../services/repositoriesServices'
+import { getRepositories } from '../services/repositoriesServices.ts'
 
 function useRepositories() {
   const [loading, setLoading] = useState(false)

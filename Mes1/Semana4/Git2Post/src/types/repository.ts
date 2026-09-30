@@ -5,4 +5,7 @@ export interface Repository {
     description: string
     topics?: string[]
     default_branch: string 
+    owner: {
+        login: string
+    }
 }

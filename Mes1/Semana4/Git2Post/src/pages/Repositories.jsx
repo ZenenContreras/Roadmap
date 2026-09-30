@@ -8,7 +8,7 @@ function Repositories() {
   const {state, dispatch} = UseGit2Post()
   const { loading, searchRepositories} = useRepositories()
 
-  const username = state.user?.name
+  const username = state.user?.login
 
   useEffect(() => {
 

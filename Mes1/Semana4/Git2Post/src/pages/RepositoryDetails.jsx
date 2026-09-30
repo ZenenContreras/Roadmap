@@ -22,6 +22,7 @@ function RepositoryDetails() {
     async function commits(){
       try {
         const data = await searchCommits(repository.owner.login, repository.name )
+        
         if(data){
           dispatch({type: 'SET_COMMITS', payload: data})
         }
