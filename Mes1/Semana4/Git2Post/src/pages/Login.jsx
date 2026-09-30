@@ -23,7 +23,7 @@ function Login() {
     if (data) {
       dispatch({
         type: 'SET_USER',
-        payload: { name: data.login, img: data.avatar_url }
+        payload: { login: data.login, avatar_url: data.avatar_url }
       })
       navigate('/dashboard')
     }

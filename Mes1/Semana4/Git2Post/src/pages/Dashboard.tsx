@@ -9,8 +9,8 @@ const sections = [
 
 function Dashboard() {
   const { state } = UseGit2Post()
-  const username = state.user?.name
-  const avatar = state.user?.img
+  const username = state.user?.login
+  const avatar = state.user?.avatar_url
 
   return (
     <section className="flex flex-col gap-3 md:gap-2">

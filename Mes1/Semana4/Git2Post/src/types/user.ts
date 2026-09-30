@@ -1,6 +1,6 @@
 export interface GithubUser {
     readonly id: number;
-    name: string;
+    login: string;
     bio: string;
-    img: string;
+    avatar_url: string;
 }
