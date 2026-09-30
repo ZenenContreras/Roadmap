@@ -1,11 +1,12 @@
 import { createContext, ReactNode, useReducer, Dispatch } from 'react'
 import { GithubUser } from '../types/user'
 import { Repository } from '../types/repository'
+import { Commits } from '../types/commits'
 
 type ContextState = {
   user: GithubUser | null
   repositories: Repository[] 
-  repositoryCommits: []
+  repositoryCommits: Commits[]
   generatedPost: string | null
 }
 
