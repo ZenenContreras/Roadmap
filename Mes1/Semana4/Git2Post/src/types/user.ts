@@ -1,6 +1,6 @@
-export type GithubUser = {
-    id: number;
-    username: string;
+export interface GithubUser {
+    readonly id: number;
+    name: string;
     bio: string;
-    avatar_url: string;
+    img: string;
 }

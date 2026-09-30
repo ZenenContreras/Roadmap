@@ -1,6 +1,5 @@
 import { Link } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
-import useGithub from '../hooks/useGithub'
 
 const sections = [
   { to: '/dashboard/repositories', title: 'Repositories', description: 'Your connected GitHub projects.' },
@@ -10,7 +9,7 @@ const sections = [
 
 function Dashboard() {
   const { state } = UseGit2Post()
-  const username =  state.user?.name
+  const username = state.user?.name
   const avatar = state.user?.img
 
   return (
