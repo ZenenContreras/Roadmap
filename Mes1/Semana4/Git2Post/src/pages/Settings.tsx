@@ -9,7 +9,7 @@ const rows = [
 
 function Settings() {
   const { state } = UseGit2Post()
-  const github = state.user?.github || state.user?.name
+  const github = state.user?.login
 
   return (
     <section className="flex flex-col gap-10">

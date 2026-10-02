@@ -1,5 +1,5 @@
 export interface Commits{
-    sha: number
+    sha:  string
     html_url: string
     message: string
     comment_count: number

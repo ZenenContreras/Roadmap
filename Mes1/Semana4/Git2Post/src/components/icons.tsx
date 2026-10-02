@@ -1,4 +1,8 @@
-export function IconActivity(props) {
+type iconsProps = {
+  className? : string
+}
+
+export function IconActivity(props: iconsProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
@@ -6,7 +10,7 @@ export function IconActivity(props) {
   )
 }
 
-export function IconMoon(props) {
+export function IconMoon(props: iconsProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
@@ -14,7 +18,7 @@ export function IconMoon(props) {
   )
 }
 
-export function IconSun(props) {
+export function IconSun(props: iconsProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <circle cx="12" cy="12" r="4" />
@@ -23,7 +27,7 @@ export function IconSun(props) {
   )
 }
 
-export function IconSearch(props) {
+export function IconSearch(props : iconsProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <circle cx="11" cy="11" r="8" />
@@ -32,7 +36,7 @@ export function IconSearch(props) {
   )
 }
 
-export function IconLoader(props) {
+export function IconLoader(props : iconsProps) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
@@ -40,7 +44,7 @@ export function IconLoader(props) {
   )
 }
 
-export function IconUser(props) {
+export function IconUser(props: iconsProps) {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
@@ -49,7 +53,7 @@ export function IconUser(props) {
   )
 }
 
-export function IconBook(props) {
+export function IconBook(props: iconsProps) {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
@@ -57,7 +61,7 @@ export function IconBook(props) {
   )
 }
 
-export function IconFile(props) {
+export function IconFile(props: iconsProps) {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />

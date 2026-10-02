@@ -1,7 +1,7 @@
 import { Commits } from "../types/commits";
 
 type CommitsResponseT = {
-    sha: number
+    sha: string
     html_url: string
     commit: {
         message: string
@@ -37,7 +37,6 @@ export async function commitsService(username: string, repo: string): Promise<Co
         }
     }))
 
-    console.log(data)
 
     return data
 }

@@ -11,7 +11,7 @@ function RepositoryDetails() {
   const {state, dispatch} = UseGit2Post()
   const repositories = state.repositories
   const repository = repositories.find((repo) => String(repo.id) === id)
-  const {loading, error, searchCommits} = useCommits()
+  const {loading, searchCommits} = useCommits()
 
   useEffect(() => {
 
@@ -19,9 +19,11 @@ function RepositoryDetails() {
       return
     }
 
+    const current = repository
+
     async function commits(){
       try {
-        const data = await searchCommits(repository.owner.login, repository.name )
+        const data = await searchCommits(current.owner.login, current.name )
         
         if(data){
           dispatch({type: 'SET_COMMITS', payload: data})

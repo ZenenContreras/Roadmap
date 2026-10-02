@@ -1,7 +1,13 @@
 import { Link } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
 
-const sections = [
+type sectionsValue = {
+  to: string
+  title: string
+  description: string
+}
+
+const sections: sectionsValue[] = [
   { to: '/dashboard/repositories', title: 'Repositories', description: 'Your connected GitHub projects.' },
   { to: '/dashboard/posts', title: 'Posts', description: 'Content created from your activity.' },
   { to: '/dashboard/settings', title: 'Settings', description: 'Account, GitHub and preferences.' },

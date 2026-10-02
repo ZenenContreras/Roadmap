@@ -14,10 +14,12 @@ function Repositories() {
 
     if(!username) return
 
+    const currentUsername = username
+
     async function repositories(){
 
       try {
-        const data = await searchRepositories(username)
+        const data = await searchRepositories(currentUsername)
 
         if(data) {
           dispatch({ 

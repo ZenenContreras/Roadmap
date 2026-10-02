@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { getUser } from '../services/githubService'
+import { GithubUser } from '../types/user'
 
 function useGithub() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<GithubUser | null>(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<String |null>(null)
 
-  async function searchUser(username) {
+  async function searchUser(username: string) {
     setLoading(true)
     setError(null)
     setUser(null)
@@ -16,7 +17,8 @@ function useGithub() {
       setUser(user)
       return user
     } catch (error) {
-      setError(error.message)
+      const message = error instanceof Error ? error.message : 'Failed to fetch commits'
+      setError(message)
       return null
     } finally {
       setLoading(false)

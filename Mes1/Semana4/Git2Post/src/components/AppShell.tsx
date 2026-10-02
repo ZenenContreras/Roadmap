@@ -1,6 +1,17 @@
 import { Link } from 'react-router'
 import ThemeToggle from './ThemeToggle'
 import { IconActivity } from './icons'
+import { ReactNode } from 'react'
+
+type AppHeaderProps = {
+  subtitle : string
+  to?: string
+}
+
+type AppShellProps = {
+  subtitle : string
+  children : ReactNode
+}
 
 function XLogo() {
   return (
@@ -10,7 +21,7 @@ function XLogo() {
   )
 }
 
-export function AppHeader({ subtitle, to = '/' }) {
+export function AppHeader({ subtitle, to = '/' } : AppHeaderProps) {
   return (
     <header className="flex items-start justify-between gap-4">
       <Link to={to} className="text-left">
@@ -41,7 +52,9 @@ export function AppFooter() {
   )
 }
 
-function AppShell({ subtitle, children }) {
+
+
+function AppShell({ subtitle, children } : AppShellProps) {
   return (
     <div className="mx-auto flex min-h-svh w-full max-w-175 flex-col gap-10 px-5 pt-8 sm:px-8 md:max-w-201 md:pt-14">
       <AppHeader subtitle={subtitle} />

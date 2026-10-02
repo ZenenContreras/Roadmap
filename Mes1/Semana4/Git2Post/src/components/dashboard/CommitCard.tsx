@@ -1,6 +1,11 @@
 import {memo} from 'react'
+import { Commits } from '../../types/commits'
 
-const CommitCard = memo(function CommitCard({commit}) {
+type CommitCardProps = {
+  commit: Commits
+}
+
+const CommitCard = memo(function CommitCard({commit} : CommitCardProps) {
   return (
     <li key={commit.sha} className="py-4">
     <a

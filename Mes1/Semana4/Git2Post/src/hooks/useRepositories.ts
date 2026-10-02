@@ -3,9 +3,9 @@ import { getRepositories } from '../services/repositoriesServices.ts'
 
 function useRepositories() {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<String | null>(null)
 
-  async function searchRepositories(username) {
+  async function searchRepositories(username: string ) {
     setLoading(true)
     setError(null)
 
@@ -13,7 +13,8 @@ function useRepositories() {
       const data = await getRepositories(username)
       return data
     } catch (error) {
-      setError(error.message)
+      const message = error instanceof Error ? error.message : 'Failed to fetch commits'
+      setError(message)
       return null
     } finally {
       setLoading(false)

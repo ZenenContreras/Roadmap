@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router'
 import UseGit2Post from '../hooks/UseGit2Post'
 import AppShell from '../components/AppShell'
@@ -12,7 +12,7 @@ function Login() {
   const [username, setUsername] = useState('')
   const [queried, setQueried] = useState('')
 
-  async function handleLogin(event) {
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const github = username.trim()
     if (!github) return
@@ -23,7 +23,7 @@ function Login() {
     if (data) {
       dispatch({
         type: 'SET_USER',
-        payload: { login: data.login, avatar_url: data.avatar_url }
+        payload: data
       })
       navigate('/dashboard')
     }

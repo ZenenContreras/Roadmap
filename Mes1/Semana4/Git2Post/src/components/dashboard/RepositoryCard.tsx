@@ -1,7 +1,12 @@
 import { Link } from "react-router"
 import { memo } from "react"
+import { Repository } from "../../types/repository"
 
-const RepositoryCard = memo(function RepositoryCard({repository}) {
+type RepositoryCardProps = {
+    repository: Repository
+}
+
+const RepositoryCard = memo(function RepositoryCard({repository} : RepositoryCardProps) {
     return (
         <li key={repository.id} className="py-4">
             <Link

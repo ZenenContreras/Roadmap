@@ -13,7 +13,7 @@ type ContextState = {
 type ContextAction = 
   | {type: 'SET_USER' ; payload: GithubUser | null}
   | {type: 'SET_REPOSITORIES' ; payload: Repository[]}  
-  | {type: 'SET_COMMITS' ; payload: []}
+  | {type: 'SET_COMMITS' ; payload: Commits[]}
   | {type: 'SET_GENERATED_POST' ; payload: string | null}
   | {type: 'RESET'}
 
