@@ -11,7 +11,7 @@ export async function getUser(username: string): Promise<GithubUser>{
     throw new Error('Failed to fetch user')
   }
 
-  const userData = await response.json()
+  const userData = await response.json() as GithubUser
 
   const data: GithubUser = {
     id: userData.id, 
@@ -19,6 +19,6 @@ export async function getUser(username: string): Promise<GithubUser>{
     avatar_url: userData.avatar_url, 
     bio: userData.bio
   }
-  console.log(data)
+  
   return data
 }
