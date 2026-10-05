@@ -177,9 +177,6 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 
 **Resultado:** Full-stack funcionando con backend en Go.
 
----
-
-# MES 3 — CLOUD + SOFTWARE ENGINEERING
 
 ## Semana 9 — Testing
 
@@ -193,6 +190,9 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | Edge cases | Casos límite | Tests robustos |
 
 **Proyecto:** testear backend y frontend.
+
+---
+# MES 3 — CLOUD + SOFTWARE ENGINEERING
 
 ## Semana 10 — Docker
 
