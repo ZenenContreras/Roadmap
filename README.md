@@ -12,8 +12,8 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | 2 | JavaScript Intermedio + APIs | Promises, async/await, fetch, HTTP y APIs |
 | 3 | React Fundamentals + proyecto | Dominar fundamentos de React y construir un proyecto |
 | 4 | React Intermedio + proyecto | Profundizar React y construir un proyecto completo |
-| 5 <-- I'm here| TypeScript + React Hooks | Types, interfaces, unions, functions, generics básicos + hooks |
-| 6 | Go Fundamentals + Backend | Dominar Go y construir una REST API |
+| 5 | TypeScript + React Hooks | Types, interfaces, unions, functions, generics básicos + hooks |
+| 6 <-- I'm here| Go Fundamentals + Backend | Dominar Go y construir una REST API |
 | 7 | PostgreSQL + Go | Integrar PostgreSQL y diseñar una BD relacional |
 | 8 | Backend Architecture + Authentication | Services, repositories, middleware, JWT/cookies y auth |
 | 9 | Testing | Unit, integration, API testing y React Testing Library |
