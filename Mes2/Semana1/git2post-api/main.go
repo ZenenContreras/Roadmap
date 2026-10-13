@@ -144,6 +144,34 @@ func buscarPost (posts []Post, id int) (Post, bool){
 	return Post{}, false
 }
 
+func punter () {
+	age := 24
+	ptr := &age
+
+	fmt.Println(age) // variable
+	fmt.Println(ptr) // direccion en memoria
+	fmt.Println(*ptr) // valor apuntado
+
+	*ptr = 30
+
+	fmt.Println(age) // variable modificada en la direccion en memoria
+
+	post := Post{
+		ID: 1,
+		Content: "Old Content",
+	}
+
+	ptrPost := &post
+
+	*&ptrPost.Content = "New Content"
+
+	fmt.Println(post.Content)
+}
+
+func (p Post) Print(){
+	fmt.Println(p.Content)
+}
+
 func main() {
 	grades := []float64{4, 5, 3, 2}
 
@@ -181,5 +209,10 @@ func main() {
 	}
 
 	fmt.Println(buscarPost(posts, 2))
+
+	punter()
+
+	post.Print()
+
 
 }
