@@ -81,8 +81,48 @@ func average(grades []float64) float64 {
 }
 
 func mapbasico () {
+	ages := map[string]int{}
 
+	ages["Zenen"] = 24
+	ages["Ana"] = 22
+	ages["Carlos"] = 27
+
+	value, ok := ages["Zenen"]
+
+	if !ok{
+		fmt.Println("user not found")
+	}else{
+		fmt.Println("User found: ", value)
+	}
+
+	delete(ages, "Ana")
+	fmt.Println(ages)
 	
+}
+
+var repositories = map[int]string{
+	1: "Git2Post",
+	2: "DevPulse",
+	3: "Portfolio",
+}
+
+func findRepository (id int) (string, bool){
+
+	name, ok := repositories[id]
+
+	if !ok{
+		fmt.Println("No se encontro un repositorio con ese id", ok)
+	}else{
+		fmt.Println("Reposiorio encontrado! ", name)
+	}
+
+	return name, ok
+
+}
+
+type Post struct {
+	ID int `json:"id"`
+	Content string `json:"content"`
 }
 
 
@@ -94,11 +134,52 @@ func login(username string, password int) {
 	}
 }
 
+func buscarPost (posts []Post, id int) (Post, bool){
+
+	for _, post := range posts{
+		if post.ID == id{
+			return post, true
+		}
+	}
+	return Post{}, false
+}
+
 func main() {
 	grades := []float64{4, 5, 3, 2}
 
 	login("admin", 1234)
+
 	practicaDia2()
+
 	fmt.Println(average(grades))
+
+	mapbasico()
+
+	findRepository(2)
+
+	post := Post{
+		ID: 1,
+		Content: "Learning go",
+	}
+
+	post.Content = "Learning Go for backend development"
+	fmt.Println(post.ID , post.Content)
+
+	posts := []Post{
+		{
+			ID: 1,
+			Content: "Learning go",
+		},
+		{
+			ID: 2,
+			Content: "Building Git2post",
+		},
+	}
+
+	for _, post := range posts{
+		fmt.Println(post)
+	}
+
+	fmt.Println(buscarPost(posts, 2))
 
 }
