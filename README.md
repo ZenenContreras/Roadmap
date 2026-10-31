@@ -346,5 +346,3 @@ Semana 14 → Data Structures + Technical Questions
 Semana 15 → Algorithms + Applications
 Semana 16 → Portfolio + Interviews + Job Search
 ```
-
-> **Regla del roadmap:** primero entender → después construir → después depurar → finalmente usar IA como herramienta de productividad, no como sustituto del razonamiento.
