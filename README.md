@@ -13,8 +13,8 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | 3 | React Fundamentals + proyecto | Dominar fundamentos de React y construir un proyecto |
 | 4 | React Intermedio + proyecto | Profundizar React y construir un proyecto completo |
 | 5 | TypeScript + React Hooks | Types, interfaces, unions, functions, generics básicos + hooks |
-| 6 <-- I'm here| Go Fundamentals + Backend | Dominar Go y construir una REST API |
-| 7 | PostgreSQL + Go | Integrar PostgreSQL y diseñar una BD relacional |
+| 6 | Go Fundamentals + Backend | Dominar Go y construir una REST API |
+| 7 <-- Estoy aquí | PostgreSQL + Go + Caching Fundamentals | Integrar PostgreSQL, diseñar una BD relacional e introducir caching |
 | 8 | Backend Architecture + Authentication | Services, repositories, middleware, JWT/cookies y auth |
 | 9 | Testing | Unit, integration, API testing y React Testing Library |
 | 10 | Docker | Dockerfile, Compose y variables de entorno |
@@ -154,8 +154,12 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | Transactions | Operaciones atómicas | Mantener consistencia |
 | Migrations | Versionar esquema | Gestionar cambios de BD |
 | Environment variables | Configuración segura | Separar secretos |
+| Caching fundamentals | Cache hit/miss, TTL, cuándo cachear | Entender los beneficios y límites del caché |
+| In-memory caching | Implementación conceptual con `map` en Go | Comprender el caché local |
+| Cache-Aside | Flujo cache → PostgreSQL → cache | Aplicar el patrón básico |
+| Redis fundamentals | `GET`, `SET`, `DEL`, `EXPIRE` | Conocer comandos esenciales |
 
-**Proyecto:** Go API + PostgreSQL.
+**Proyecto:** Go API + PostgreSQL, con una primera exploración de caching y Redis.
 
 ## Semana 8 — Backend Architecture + Authentication
 
@@ -172,10 +176,15 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | Authorization | Roles/permisos | Recursos protegidos |
 | Error handling | Errores HTTP consistentes | API predecible |
 | REST architecture | Handler → Service → Repository | Backend profesional |
+| Redis + Go | Conectar Redis usando un cliente Go | Integrar un caché compartido |
+| Cache-Aside | Cachear lecturas frecuentes, por ejemplo `GET /products` | Reducir consultas repetidas a PostgreSQL |
+| TTL e invalidación | Expiración e invalidar al crear/actualizar/eliminar | Evitar datos obsoletos |
+| Resilience | Fallback a PostgreSQL si Redis falla | Mantener la API disponible |
+| Cache testing | Probar hit, miss e invalidación | Verificar el comportamiento del caché |
 
-**Proyecto:** React + Go + PostgreSQL + Auth.
+**Proyecto:** React + Go + PostgreSQL + Auth + Redis Caching.
 
-**Resultado:** Full-stack funcionando con backend en Go.
+**Resultado:** Full-stack funcionando con backend en Go y caching con Redis.
 
 
 ## Semana 9 — Testing
@@ -301,7 +310,7 @@ Llegar preparado para aplicar a posiciones **Junior Software Engineer / Full-Sta
 | Semana 3 | React Fundamentals Project | React + JavaScript |
 | Semana 4 | React Intermediate Project | React + APIs + Router |
 | Semana 5 | TypeScript React App | React + TypeScript + Hooks |
-| Semanas 6–8 | Full-stack App | React + Go + PostgreSQL + Auth |
+| Semanas 6–8 | Full-stack App | React + Go + PostgreSQL + Auth + Redis |
 | Semanas 9–12 | Production-ready Full Stack | Testing + Docker + AWS + CI/CD |
 | Semanas 13–16 | Portfolio + interview projects | JS + React + TS + Full Stack |
 
@@ -338,8 +347,8 @@ Semana 6  → Go Fundamentals + REST API
 Semana 7  → PostgreSQL + Go
 Semana 8  → Backend Architecture + Auth
 Semana 9  → Testing
-Semana 10 → Docker
-Semana 11 → AWS
+Semana 10 → Docker + Redis en Docker Compose
+Semana 11 → AWS + CloudFront / caching en cloud
 Semana 12 → CI/CD + Software Engineering
 Semana 13 → JS + React Interview Prep
 Semana 14 → Data Structures + Technical Questions
